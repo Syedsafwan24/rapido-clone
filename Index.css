@@ -15,7 +15,7 @@ body {
 .page_one_img {
     width: 1080px;
     height: 700px;
-    background-color: #ff0000;
+    background-color: #D24545;
     border-radius: 350px;
     overflow: hidden;
 }
@@ -118,7 +118,7 @@ body {
 
 .navbar button span:hover {
     padding-right: 10px;
-    color: #d24545;
+    color: #D24545;
 }
 
 .navbar button a {
@@ -163,7 +163,7 @@ body {
     padding: 15px 25px;
     border-radius: 25px 25px 25px 0px;
     font-size: 17px;
-    background-color: #ff0000;
+    background-color: #D24545;
     color: black;
     border: none;
     margin-right: 20px;
@@ -184,7 +184,7 @@ body {
 
 #black_btn span:hover {
     padding-right: 10px;
-    color: #ff0000;
+    color: #D24545;
 }
 
 
@@ -242,7 +242,7 @@ body {
 .page_two_image_one h1 {
     width: 45px;
     height: 150px;
-    background-color: #f9c935;
+    background-color: #D24545;
     border-radius: 20px 0px 20px 20px;
     margin-top: 40px;
     margin-bottom: 30px;
@@ -304,7 +304,7 @@ body {
     content: "";
     width: 50px;
     height: 3px;
-    background-color: #f9c935;
+    background-color: #D24545;
     position: absolute;
     left: 0;
     bottom: 0%;
@@ -315,7 +315,7 @@ body {
 .page_two_text button {
     padding: 20px 30px;
     border-radius: 25px 25px 25px 0px;
-    background-color: #f9c935;
+    background-color: #D24545;
     font-size: 17px;
     border: none;
     font-weight: bold;
@@ -363,7 +363,7 @@ body {
     content: "";
     width: 50px;
     height: 5px;
-    background-color: #f9c935;
+    background-color: #D24545;
     position: absolute;
     bottom: 0;
     margin-left: 60px;
