@@ -1,3 +1,3 @@
-# Clone_Rapido_Website
+# Clone_Ridease_Website
 
-https://yadavyogendra28.github.io/Clone_Rapido_Website/
+https://yadavyogendra28.github.io/Clone_Ridease_Website/

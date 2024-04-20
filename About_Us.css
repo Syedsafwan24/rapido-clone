@@ -64,7 +64,7 @@ body {
 .page_two_image_one_about h1 {
     width: 45px;
     height: 150px;
-    background-color: #f9c935;
+    background-color: #D24545;
     border-radius: 20px 0px 20px 20px;
     margin-top: 40px;
     margin-bottom: -40px;
@@ -170,7 +170,7 @@ body {
 
 
 .page3_background {
-    background: #f9c935 url(Photos/WhatsApp\ Image\ 2022-12-15\ at\ 5.13.52\ AM.jpeg);
+    background: #D24545 url(Photos/WhatsApp\ Image\ 2022-12-15\ at\ 5.13.52\ AM.jpeg);
     background-blend-mode: multiply;
     background-size: cover;
     background-repeat: no-repeat;
