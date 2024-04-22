@@ -65,3 +65,6 @@
 }
 
 
+.image_with_shadow {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* horizontal-offset vertical-offset blur-radius color */
+}
