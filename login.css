@@ -1,0 +1,283 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.container_div {
+    margin-top: 200px;
+    /* border: 1px solid red; */
+    width: 100%;
+    height: auto;
+    display: inline-flex;
+    position: relative;
+}
+
+.Contact_Us_Form_div {
+    width: 70%;
+    height: auto;
+    position: relative;
+    margin-left: 5%;
+    margin-right: 8%;
+}
+
+.Contact_Us_Form_div h1 {
+    font-size: 50px;
+    font-weight: 1000;
+}
+
+.Contact_Us_Form_div p {
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.Contact_Us_Form_div input[type=text],
+.Contact_Us_Form_div input[type=password] {
+    width: 80%;
+    padding: 15px 22px;
+    margin: 10px 5px;
+    box-sizing: border-box;
+}
+
+::placeholder {
+    color: #525250;
+    opacity: 1;
+    font-size: 14px;
+}
+
+.Contact_Us_Form_div input[type=text],
+.Contact_Us_Form_div input[type=password],
+.Contact_Us_Form_div select {
+    width: 75%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.Contact_Us_Form_div input[type=submit] {
+    width: 75%;
+    background-color: #D24545;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 100px;
+}
+
+.Contact_Us_Form_div input[type=submit]:hover {
+    background-color: #bc3131;
+}
+
+.Contact_Us_Address_div img{
+    width: 100px;
+}
+
+/* Footer CSS Start  */
+
+
+.Container {
+    width: 100%;
+    height: 250px;
+    background-color: black;
+    display: flex;
+    position: relative;
+}
+
+.Container div {
+    color: white;
+    /* border: 1px solid rgb(187, 22, 22); */
+    /* width: 25%; */
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+
+.div1 {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 100px;
+    flex: content;
+
+}
+
+.div1 p {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.div1 a img {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+.div2 {
+    position: absolute;
+    margin-top: 30px;
+
+}
+
+.div2 p {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.div2 a img {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.div3 {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: -90px;
+}
+
+.div3 a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.div4 {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: -90px;
+}
+
+.div4 a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.div5 {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: -90px;
+}
+
+.div5 div a {
+
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+    margin: 60px;
+    margin-left: -40px;
+}
+
+.div5 p {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+}
+
+
+
+
+/* Footer CSS End  */
+
+/* ==============================Navication Bar ============================= */
+
+#navbar {
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+
+}
+
+.navbar {
+
+    display: flex;
+    height: 90px;
+    align-items: center;
+    width: 1100px;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.navbar_sticky {
+    top: 0%;
+    width: 100%;
+    z-index: 100;
+}
+
+.navbar img {
+    width: 130px;
+    position: relative;
+    top: 10%;
+    height: 130px;
+}
+
+.navbar ul {
+    display: flex;
+    width: 600px;
+    justify-content: space-between;
+    margin-left: 180px;
+}
+
+.navbar ul li {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    color: black;
+    padding-bottom: 6px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar ul li::before {
+    content: "";
+    width: 0px;
+    height: 3px;
+    position: absolute;
+    background-color: black;
+    bottom: 0%;
+    left: 0%;
+    transition: all 0.5s;
+}
+
+.navbar ul li:hover::before {
+    width: 100%;
+
+}
+
+.navbar ul li:hover::after {
+    width: 100%;
+}
+
+.navbar button {
+    padding: 10px 20px;
+    border-radius: 20px 15px 1px 20px;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+
+.navbar button span:hover {
+    padding-right: 10px;
+    color: #D24545;
+}
+
+.navbar button a {
+    text-decoration: none;
+    color: white;
+}
