@@ -30,10 +30,10 @@ body {
 }
 
 .page_one_img img {
-    width: 1050px;
+    width: 500px;
     transform: rotate(45deg);
-    margin-top: 50px;
-    margin-left: -270px;
+    margin-top: 70px;
+    margin-left: 150px;
 
 }
 
@@ -102,7 +102,10 @@ body {
 .navbar ul li:hover::before {
     width: 100%;
 
+}
 
+.navbar ul li:hover::after {
+    width: 100%;
 }
 
 .navbar button {
