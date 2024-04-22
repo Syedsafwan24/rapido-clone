@@ -22,19 +22,17 @@
 
 <div class="container_div">
     <div class="Contact_Us_Form_div">
-        <h1>SignUp</h1>
+        <h1>Sign Up</h1>
         <br>
         <form action="signup_process.php" method="post">
-            <!-- <p>Full Name:</p> -->
             <input type="text" name="fullname" placeholder="Enter your full name">
-            <input type="text" name="phone no" placeholder="Enter your Phone Number">
-            <!-- <p>Email:</p> -->
+            <input type="text" name="phone_no" placeholder="Enter your Phone Number">
             <input type="text" name="email" placeholder="Enter your email">
-            <!-- <p>Password:</p> -->
-            <input type="password" name="password" placeholder="Enter your password">
-            <input type="password" name="password" placeholder="Confirm your password">
-            <input type="submit" value="SignUp">
-            <p style="margin-bottom: 100px;">Already a user? <a href="login.html">LogIn</a></p>
+            <input type="password" name="password" id="password" placeholder="Enter your password">
+            <!-- <button type="button" id="togglePassword">Show</button> -->
+            <input type="password" name="confirm_password" placeholder="Confirm your password">
+            <input type="submit" value="Sign Up">
+            <p style="margin-bottom: 100px;">Already a user? <a href="login.html">Log In</a></p>
         </form>
     </div>
 
@@ -106,6 +104,17 @@
 </div>
 
 <!-- Fotter close  -->
+
+<!-- <script>
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePasswordBtn.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        togglePasswordBtn.textContent = type === 'password' ? 'Show' : 'Hide';
+    });
+</script> -->
 
 </body>
 </html>
