@@ -20,7 +20,7 @@ body {
 }
 
 .page_two_background_about {
-    background-color: #fcf7de;
+    background-color: #ffabab;
     width: 850px;
     height: 500px;
     border-radius: 250px;
@@ -64,7 +64,7 @@ body {
 .page_two_image_one_about h1 {
     width: 45px;
     height: 150px;
-    background-color: #D24545;
+    background-color: #d24545;
     border-radius: 20px 0px 20px 20px;
     margin-top: 40px;
     margin-bottom: -40px;
@@ -130,7 +130,7 @@ body {
 .page2_circle {
     width: 600px;
     height: 400px;
-    background-color: #fcf7de;
+    background-color: #ffabab;
     border-radius: 40%;
     transform: rotate(35deg);
     margin-left: -250px;
@@ -170,7 +170,7 @@ body {
 
 
 .page3_background {
-    background: #D24545 url(Photos/WhatsApp\ Image\ 2022-12-15\ at\ 5.13.52\ AM.jpeg);
+    background: #ffabab url(Photos/WhatsApp\ Image\ 2022-12-15\ at\ 5.13.52\ AM.jpeg);
     background-blend-mode: multiply;
     background-size: cover;
     background-repeat: no-repeat;
