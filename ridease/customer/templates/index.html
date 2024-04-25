@@ -1,0 +1,109 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block head %}
+
+{% endblock head %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+</head>
+
+{% block body %}
+    <div class="main_div">
+        <div class="page_one">
+            <div class="page_one_background_img">
+                <div class="page_one_img">
+                    <img src="{% static "photos/index-page-bg.png" %}">
+                </div>
+            </div>
+
+            <div class="page_one_text">
+                <h1> India’s largest bike <br> taxi service</h1>
+                <p>
+                    Ridease is India’s first and fastest-growing <br> Bike taxi app with a whopping 25 Million+ <br>app
+                    downloads. We are now running <br> operations in more than 100 cities.
+                </p>
+                <div class="page_one_text_button">
+                    <a href="login.html">
+                        <button><span>Request for a ride</span></button>
+                    </a>
+                    <button id="black_btn"> <span>Sign-up as Driver<span></button>
+                </div>
+            </div>
+
+            <div id="Page_one_Iamge">
+                <a href="Safety.html" target="_blank"> 
+                <img src="{% static "Photos/safety_guideline.png" %}" width="100%">  </a>
+            </div>
+
+        </div>
+        <div class="page_two">
+            <div class="page_two_background">
+                <div class="page_two_images">
+
+                    <div class="page_two_image_one">
+                        <img src="{% static "Photos/y_p.svg" %}">
+                        <img src="{% static "Photos/who_we_1 (1).webp" %}" id="radius">
+                    </div>
+
+                    <div class="page_two_img_two">
+                        <h1> </h1>
+                        <img src="{% static "Photos/who_we_2.webp" %}">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="page_two_text">
+                <h1>Know Us Better</h1><br>
+                <p>We have crossed 10 million happy customers <br> and 100 million rides. Ridease is here to<br>
+                    revolutionize intra-city travel as we bring you <br> redefined comfort & convenience with our
+                    disruptive service model. <br>
+                </p>
+                <button><a style=" text-decoration: none; color:black" href="https://www.Ridease.bike/About"> Read more
+                        here</a> </button>
+            </div>
+        </div>
+
+        <div class="page_three">
+
+            <div class="page_three_circle">
+                <h1> Our Imapct </h1> <br>
+                <p> Our presence in the country has changed the concept of intra-city travel and <br> made last-mile
+                    connectivity affordable for all.</p>
+
+                <div class="page_three_img">
+
+                    <div class="page_three_images">
+                        <img src="{% static "Photos/presence_1.webp" %}">
+                        <h3>25M +</h3>
+                        <p>Download</p>
+                    </div>
+
+                    <div class="page_three_images">
+                        <img src="{% static "Photos/presence_2.webp" %}">
+                        <h3>100M +</h3>
+                        <p>Cities</p>
+
+                    </div>
+                    <div class="page_three_images">
+                        <img src="{% static "Photos/presence_3.webp" %}">
+                        <h3>1M +</h3>
+                        <p>Captains</p>
+                    </div>
+
+                    <div class="page_three_images">
+                        <img src="{% static "Photos/presence_4.webp" %}">
+                        <h3>10M +</h3>
+                        <p>customers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+    {% endblock body %}

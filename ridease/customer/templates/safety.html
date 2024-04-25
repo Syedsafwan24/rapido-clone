@@ -1,0 +1,84 @@
+{% extends "nav.html" %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'safety.css' %}">
+{% endblock head %}
+
+{% block body %}
+
+    <div class="main_div">
+
+        <div class="Safety_navbar">
+
+            <div class="Safety_navbar_content">
+                <a href="Safety.html">Overviews</a>
+                <a href="#Customer">Customers</a>
+                <a href="#Caption">Captains</a>
+            </div>
+        </div>
+        <!-- Safety Overview -->
+        <div class="Safety_image1">
+            <img src="{% static "Photos/safety_guideline.png" %}">
+
+            <h1>Covers Everyone </h1>
+
+            <div class="Safety_image1_img2">
+                <img src="{% static "Photos/cover-customer.png" %}">
+                <img src="{% static "Photos/cover-captain.png" %}">
+            </div>
+
+            <div class="Safety_Background_last">
+
+                <img src="{% static "Photos/safety_groups_overview (1).png" %}">
+                <div class="Safety_hover">
+                    <img src="{% static "Photos/safety_way_forward_overview.png" %}">
+                    <img src="{% static "Photos/wayforward-expanded.png" %}">
+
+                </div>
+
+            </div>
+        </div>
+        <br><br><br>
+        <!-- <div class="Safety_navbar">
+
+            <div class="Safety_navbar_content">
+                <a href="Safety.html">Overviews</a>
+                <a href="#">Customers</a>
+                <a href="#">Captains</a>
+            </div>
+        </div> -->
+        <br><br><br>
+
+        <!-- Customer div id  -->
+        <div class="Safety_image1" id="Customer">
+            <img src="{% static "Photos/customer-safety.png" %}">
+            <div class="Safety_Customer_image1_img2">
+                <img src="{% static "Photos/captain-verification.png" %}">
+
+            </div>
+
+            <div class="Safety_Background_last">
+
+                <!-- <img src="Photos/safety-features-customer (1).png"> -->
+
+                <div class="Safety_hover">
+                    <img src="{% static "Photos/safety_way_forward_overview.png" %}">
+                    <img src="{% static "Photos/wayforward-expanded.png" %}">
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+        <!-- Caption div id  -->
+        <div class="Safety_image1" id="Caption">
+            <img src="{% static "Photos/captain-safety.png" %}">
+        </div>
+        
+    </div>
+    <br><br><br>
+
+    </div>
+{% endblock body %}

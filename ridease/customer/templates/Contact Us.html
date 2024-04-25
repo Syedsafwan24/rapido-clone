@@ -1,0 +1,85 @@
+{% extends "nav.html" %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'Contact Us.css' %}">
+{% endblock head %}
+
+{% block body %}
+
+    <div class="main_div">
+
+        <div class="container_div">
+
+            <div class="Contact_Us_Form_div">
+                <h1>You can find us here</h1>
+                <br>
+
+                <p style=" color: #525250; font-size: 20px;">Find help for your queries here:</p>
+                <br>
+                <br>
+                <p>Name </p>
+                <input type="text" placeholder="Enter your Name">
+
+                <br><br>
+                <p>Email Address </p>
+                <input type="text" placeholder="Enter your Email">
+
+                <br><br>
+                <p>Phone Number </p>
+                <input type="text" placeholder="Enter your Phone Number">
+
+                <br><br>
+                <p>You are a</p>
+                <select>
+                    <option value="australia">Captain</option>
+                    <option value="canada">Costumer</option>
+                </select>
+
+                <br><br>
+                <p>Select Query </p>
+                <select>
+                    <option value="australia">How to join Ridease as a Driver</option>
+                    <option value="canada">Driver Account Activation Request</option>
+                    <option value="australia">Driver Account Deactivation Request</option>
+                    <option value="canada">Document CHange Request</option>
+                    <option value="australia">Mobile Number change Request</option>
+                    <option value="canada">Unable to Login to Ridease Driver Account</option>
+                    <option value="australia">I need help to register as a caption</option>
+                    <option value="canada">Other</option>
+                </select>
+
+                <br><br>
+                <p>Comment </p>
+                <textarea rows="5" cols="60" name="text" placeholder="Enter Comment "></textarea>
+
+                <br><br>
+                <input type="submit" value="Submit">
+
+            </div>
+
+            <div class="Contact_Us_Address_div">
+
+                <img src="{% static "Photos/y_p.svg" %}">
+                <h4 style="margin-top: -5px;">Registered Office Address:</h4>
+                <br>
+                <p>Roppen Transportation Services Pvt Ltd,<br>3rd Floor, Sai Prithvi Arcade, Megha Hills, Sri Rama Colony, Madhapur, Hyderabad - <br>500081.</p>
+
+                <br><br><br>
+                <h4>Head Office:</h4><br>
+                <p>Roppen Transportation Services Pvt Ltd,<br> #148, 1st Floor, SLV Nilaya, 5th Main 80ft<br> road, HSR Layout 7th Sector, Bangalore<br> 560102.</p>
+
+                <br><br><br>
+
+                <h4>Corporate Office:</h4>
+                <br>
+                <p>Roppen Transportation Services Pvt Ltd<br> (Ridease), Salarpuria Softzone, Wing C, First<br> floor, Office 1, Block A, Bellandur Village, <br>Varthur Hobli, Bangalore South Taluk, Outer Ring Road, Bhatkal-560103.
+                </p>
+            </div>
+        </div>
+        <br><br><br><br><br><br><br><br>
+    </div>
+{% endblock body %}
