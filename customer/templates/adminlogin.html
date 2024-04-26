@@ -1,0 +1,46 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Signup</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+{% endblock head %}
+
+{% block body %}
+
+<div class="container_div">
+    <div class="Contact_Us_Form_div">
+        <h1>Driver Signup</h1>
+        <br>
+        <form action="{% url 'addDriver' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="fullname" placeholder="Full Name">
+            <input type="date" name="dob" placeholder="Date of Birth">
+            <select name="gender" id="gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="text" name="phone" placeholder="Phone Number">
+            <input type="text" name="email" placeholder="Email">
+            <input type="text" name="text" placeholder="Address"></input>
+            <input type="text" name="license" placeholder="License Number">
+            <input type="text" name="vehicle_reg" placeholder="Vehicle Registration Number">
+            <input type="text" name="bank_name" placeholder="Bank Name">
+            <input type="text" name="account_number" placeholder="Account Number">
+            <input type="text" name="routing_number" placeholder="Routing Number">
+            <input type="text" name="vehicle_make" placeholder="Vehicle Make">
+            <input type="text" name="vehicle_model" placeholder="Vehicle Model">
+            <input type="text" name="vehicle_color" placeholder="Vehicle Color">
+            <br><br><label><input type="checkbox" name="agreement" required> I agree to the terms and conditions</label><br>
+            <input type="submit" value="Sign Up">
+        </form>
+        <br><br><br><br>
+    </div>
+</div>
+
+{% endblock body %}
