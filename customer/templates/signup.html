@@ -19,6 +19,14 @@
         <form action="signup_process.php" method="post">
             <input type="text" name="fullname" placeholder="Enter your full name">
             <input type="text" name="phone_no" placeholder="Enter your Phone Number">
+            <select name="gender" id="gender" required>
+                <option value="" disabled selected>Select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="date" id="dob" name="dob" placeholder="Date of Birth" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
+
             <input type="text" name="email" placeholder="Enter your email">
             <input type="password" name="password" id="password" placeholder="Enter your password">
             <!-- <button type="button" id="togglePassword">Show</button> -->

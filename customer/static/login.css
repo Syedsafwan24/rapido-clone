@@ -281,3 +281,22 @@
     text-decoration: none;
     color: white;
 }
+/* Additional CSS for Date of Birth Field */
+.Contact_Us_Form_div input[type=date] {
+    width: 75%; /* Match width of other input elements */
+    padding: 12px 20px; /* Consistent padding */
+    margin: 8px 0; /* Uniform margin for vertical spacing */
+    display: inline-block; /* Align with other form elements */
+    border: 1px solid #ccc; /* Border color to match other inputs */
+    border-radius: 4px; /* Rounded corners for aesthetics */
+    box-sizing: border-box; /* Box model handling */
+    background-color: white; /* Background color, could be adjusted if needed */
+    color: #525250; /* Text color to match placeholder styles */
+}
+
+/* Styles for the placeholder in date field */
+.Contact_Us_Form_div input[type="date"]::placeholder {
+    color: #525250;
+    opacity: 1; /* Ensure visibility */
+    font-size: 14px; /* Consistent font size with other placeholders */
+}
