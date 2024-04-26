@@ -2,66 +2,45 @@
 {% load static %}
 
 {% block head %}
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Signup</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
 {% endblock head %}
 
 {% block body %}
-    <h1>Bike Taxi Driver Registration</h1>
-    <form action="{% url 'addDriver' %}" method="post">
-        <fieldset>
-            <legend>Personal Information</legend>
-            <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" name="fullname" required><br>
-            <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob" name="dob" required><br>
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender" required>
+
+<div class="container_div">
+    <div class="Contact_Us_Form_div">
+        <h1>Driver Signup</h1>
+        <br>
+        <form action="{% url 'addDriver' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="fullname" placeholder="Full Name">
+            <input type="date" name="dob" placeholder="Date of Birth">
+            <select name="gender" id="gender" required>
+                <option value="" disabled selected>Select Gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
-            </select><br>
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required><br>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
-            <label for="address">Address:</label>
-            <textarea id="address" name="address" required></textarea><br>
-        </fieldset>
+            </select>
+            <input type="text" name="phone" placeholder="Phone Number">
+            <input type="text" name="email" placeholder="Email">
+            <input type="text" name="text" placeholder="Address"></input>
+            <input type="text" name="license" placeholder="License Number">
+            <input type="text" name="vehicle_reg" placeholder="Vehicle Registration Number">
+            <input type="text" name="bank_name" placeholder="Bank Name">
+            <input type="text" name="account_number" placeholder="Account Number">
+            <input type="text" name="routing_number" placeholder="Routing Number">
+            <input type="text" name="vehicle_make" placeholder="Vehicle Make">
+            <input type="text" name="vehicle_model" placeholder="Vehicle Model">
+            <input type="text" name="vehicle_color" placeholder="Vehicle Color">
+            <br><br><label><input type="checkbox" name="agreement" required> I agree to the terms and conditions</label><br>
+            <input type="submit" value="Sign Up">
+        </form>
+        <br><br><br><br>
+    </div>
+</div>
 
-        <fieldset>
-            <legend>Identification</legend>
-            <label for="license">Driver's License Number:</label>
-            <input type="text" id="license" name="license" required><br>
-            <label for="vehicle_reg">Vehicle Registration Number:</label>
-            <input type="text" id="vehicle_reg" name="vehicle_reg" required><br>
-        </fieldset>
-
-        <fieldset>
-            <legend>Bank Account Information</legend>
-            <label for="bank_name">Bank Name:</label>
-            <input type="text" id="bank_name" name="bank_name" required><br>
-            <label for="account_number">Account Number:</label>
-            <input type="text" id="account_number" name="account_number" required><br>
-            <label for="routing_number">Routing Number:</label>
-            <input type="text" id="routing_number" name="routing_number" required><br>
-        </fieldset>
-
-        <fieldset>
-            <legend>Vehicle Details</legend>
-            <label for="vehicle_make">Vehicle Make:</label>
-            <input type="date" id="vehicle_make" name="vehicle_make" required><br>
-            <label for="vehicle_model">Vehicle Model:</label>
-            <input type="text" id="vehicle_model" name="vehicle_model" required><br>
-            <label for="vehicle_color">Vehicle Color:</label>
-            <input type="text" id="vehicle_color" name="vehicle_color" required><br>
-        </fieldset>
-
-        <fieldset>
-            <legend>Agreements and Contracts</legend>
-            <label for="agreement">I agree to the terms and conditions:</label>
-            <input type="checkbox" id="agreement" name="agreement" required><br>
-        </fieldset>
-
-        <input type="submit" value="Submit">
-    </form>
 {% endblock body %}

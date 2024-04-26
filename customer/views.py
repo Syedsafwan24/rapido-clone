@@ -2,8 +2,7 @@ from django import views
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import User
-from django.contrib.auth.hashers import check_password
+from .models import User,ContactQuery
 
 # Create your views here.
 
@@ -146,3 +145,32 @@ def addDriver(request):
         return redirect('adminlogin')
     else:
         return render(request, 'adminlogin.html')
+
+
+
+def contact_us(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number')
+        user_type = request.POST.get('user_type')
+        query_type = request.POST.get('query_type')
+        comment = request.POST.get('comment')
+
+        # Create the ContactQuery object
+        query = ContactQuery.objects.create(
+            name=name,
+            email=email,
+            phone_number=phone_number,
+            user_type=user_type,
+            query_type=query_type,
+            comment=comment
+        )
+        # Save the query object
+        query.save()
+        
+        # Redirect to a success page or another URL
+        return redirect('contactus')  # Provide the URL name for the success page
+    else:
+        return render(request, 'Contact Us.html')
+

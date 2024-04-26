@@ -34,6 +34,7 @@
 }
 
 .Contact_Us_Form_div input[type=text],
+.Contact_Us_Form_div input[type=email],
 .Contact_Us_Form_div input[type=password] {
     width: 80%;
     padding: 15px 22px;
@@ -48,6 +49,7 @@
 }
 
 .Contact_Us_Form_div input[type=text],
+.Contact_Us_Form_div input[type=email],
 .Contact_Us_Form_div input[type=password],
 .Contact_Us_Form_div select {
     width: 75%;
@@ -82,7 +84,6 @@
 }
 
 /* Footer CSS Start  */
-
 
 .Container {
     width: 100%;

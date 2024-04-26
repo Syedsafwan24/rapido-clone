@@ -14,6 +14,7 @@
     <title>RIDEASE | TravelEasy</title>
 </head>
 <body>
+
     <div class="navbar_sticky" id="navbar">
         <div class="navbar">
             <img src="{% static "photos/RIDEEASE.png" %}" alt="RideEase Logo">
@@ -22,10 +23,11 @@
                 <li> <a href="About_Us.html"> About Us</a> </li>
                 <li> <a href="Safety.html"> Safety </a> </li>
                 <li> <a href="Contact Us.html"> Contact Us </a> </li>
-                <li> <a href="{% url 'adminlogin' %}"></a>Admin</li>
+                <li> <a href="{% url 'adminlogin' %}">Admin </a></li>
             </ul>
         </div>
     </div>
+
     {% block body %}
     {% endblock body %}
     <!-- Footer start  -->

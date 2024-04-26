@@ -51,3 +51,20 @@ class DriverDetails(models.Model):
 
     def __str__(self):
         return self.fullname
+
+
+class ContactQuery(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=15)
+    USER_CHOICES = [
+        ('Captain', 'Captain'),
+        ('Customer', 'Customer'),
+    ]
+    user_type = models.CharField(max_length=8, choices=USER_CHOICES)
+    query_type = models.CharField(max_length=100)
+    comment = models.TextField()
+
+    def __str__(self):
+        return self.name
+
