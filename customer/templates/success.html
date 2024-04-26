@@ -1,36 +1,42 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Welcome</title>
-    <link rel="stylesheet" href="/Ridease Main/customer/static/success.css">
+    <title>Request a Ride</title>
+    <link rel="stylesheet" href="{% static 'success.css' %}">
 </head>
+
+
 <body>
-    <div id="welcome-banner">
-        <h1>Welcome, User!</h1>
-        <p>You successfully logged in. Here's what's happening today:</p>
-    </div>
-
-    <div id="user-stats">
-        <div class="stat">
-            <h2>254</h2>
-            <p>Projects Completed</p>
-        </div>
-        <div class="stat">
-            <h2>18</h2>
-            <p>New Messages</p>
-        </div>
-        <div class="stat">
-            <h2>67</h2>
-            <p>Tasks to Complete</p>
-        </div>
-    </div>
-
-    <div id="actions">
-        <button>View Dashboard</button>
-        <button>Update Profile</button>
+    <div class="request-ride-container">
+        <h1>Request a Ride</h1>
+        <p>Fill out the form below to book your ride.</p>
+        <form action="/submit-ride-request" method="post">
+            <div class="form-group">
+                <label for="pickup-location">Pick-up Location:</label>
+                <input type="text" id="pickup-location" name="pickup_location" required>
+            </div>
+            <div class="form-group">
+                <label for="dropoff-location">Drop-off Location:</label>
+                <input type="text" id="dropoff-location" name="dropoff_location" required>
+            </div>
+            <div class="form-group">
+                <label for="pickup-time">Pick-up Time:</label>
+                <input type="time" id="pickup-time" name="pickup_time" required>
+            </div>
+            <div class="form-group">
+                <label for="ride-type">Type of Ride:</label>
+                <select id="ride-type" name="ride_type">
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                   
+                </select>
+            </div>
+            <button type="submit" class="req">Request Ride</button>
+        </form>
     </div>
 </body>
 </html>
-s
