@@ -12,5 +12,7 @@ urlpatterns = [
     path("signup.html",views.signup,name="signup"),
     path("addUser", views.addUser, name="addUser"),
     path("afterlogin", views.validateUser, name="validate"),
-    path("success", views.success, name="success_page")
+    path("success", views.success, name="success_page"),
+    path("Admin", views.adminlogin, name="adminlogin"),
+    path("AddDriver", views.addDriver, name="addDriver")
 ]

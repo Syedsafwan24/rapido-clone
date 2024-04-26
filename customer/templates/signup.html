@@ -19,7 +19,7 @@
         <form action="{% url 'addUser' %}" method="post">
             {% csrf_token %}
             <input type="text" name="fullname" placeholder="Enter your full name">
-            <input type="text" name="phone_no" placeholder="Enter your Phone Number">
+            <input type="Number" name="phone_no" placeholder="Enter your Phone Number">
             <select name="gender" id="gender" required>
                 <option value="" disabled selected>Select your gender</option>
                 <option value="male">Male</option>
@@ -36,8 +36,6 @@
     </div>
 
 </div>
-
-
 
 {% endblock body %}
 

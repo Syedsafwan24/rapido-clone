@@ -6,6 +6,7 @@ from .models import User
 from django.contrib.auth.hashers import check_password
 
 # Create your views here.
+
 def index(request):
     return render(request, "index.html")
 
@@ -26,6 +27,9 @@ def signup(request):
 
 def success(request):
     return render(request, "success.html")
+
+def adminlogin(request):
+    return render(request, "adminlogin.html")
 
 def addUser(request):
     if request.method == 'POST':
@@ -93,3 +97,52 @@ def validateUser(request):
         print("here")
         # Handle case where method is not POST
         return render(request, 'login.html')
+    
+from django.shortcuts import render, redirect
+from .models import DriverDetails
+
+def addDriver(request):
+    if request.method == 'POST':
+        # Retrieve data from the form
+        fullname = request.POST.get('fullname')
+        dob = request.POST.get('dob')
+        gender = request.POST.get('gender')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        license = request.POST.get('license')
+        vehicle_reg = request.POST.get('vehicle_reg')
+        bank_name = request.POST.get('bank_name')
+        account_number = request.POST.get('account_number')
+        routing_number = request.POST.get('routing_number')
+        vehicle_make = request.POST.get('vehicle_make')
+        vehicle_model = request.POST.get('vehicle_model')
+        vehicle_color = request.POST.get('vehicle_color')
+        agreement = request.POST.get('agreement') == 'on'
+
+        # Create a new DriverDetails object
+        driver = DriverDetails.objects.create(
+            fullname=fullname,
+            dob=dob,
+            gender=gender,
+            phone=phone,
+            email=email,
+            address=address,
+            license=license,
+            vehicle_reg=vehicle_reg,
+            bank_name=bank_name,
+            account_number=account_number,
+            routing_number=routing_number,
+            vehicle_make=vehicle_make,
+            vehicle_model=vehicle_model,
+            vehicle_color=vehicle_color,
+            agreement=agreement
+        )
+
+        # Save the object
+        driver.save()
+
+        # Redirect to a success page or another URL
+        return redirect('adminlogin')
+    else:
+        return render(request, 'adminlogin.html')
