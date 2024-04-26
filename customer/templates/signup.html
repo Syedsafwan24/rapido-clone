@@ -16,7 +16,8 @@
     <div class="Contact_Us_Form_div">
         <h1>Sign Up</h1>
         <br>
-        <form action="signup_process.php" method="post">
+        <form action="{% url 'addUser' %}" method="post">
+            {% csrf_token %}
             <input type="text" name="fullname" placeholder="Enter your full name">
             <input type="text" name="phone_no" placeholder="Enter your Phone Number">
             <select name="gender" id="gender" required>
@@ -25,35 +26,18 @@
                 <option value="female">Female</option>
                 <option value="other">Other</option>
             </select>
-            <input type="date" id="dob" name="dob" placeholder="Date of Birth" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
-
+            <input type="text" id="dob" name="dob" placeholder="Date of Birth" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
             <input type="text" name="email" placeholder="Enter your email">
             <input type="password" name="password" id="password" placeholder="Enter your password">
-            <!-- <button type="button" id="togglePassword">Show</button> -->
             <input type="password" name="confirm_password" placeholder="Confirm your password">
             <input type="submit" value="Sign Up">
-            <p style="margin-bottom: 100px;">Already a user? <a href="login.html">Log In</a></p>
+            <p style="margin-bottom: 100px;">Already a user? <a href="{% url 'login' %}">Log In</a></p>
         </form>
     </div>
 
-    <div class="Contact_Us_Address_div" style="margin-left:-50px;">
-        <img src="{% static "photos/address_icon.png" %}" alt="address icon">
-        <h4>Contact Us</h4>
-        <p>Email: info@example.com</p>
-        <p>Phone: +1234567890</p>
-    </div>
 </div>
 
-<!-- <script>
-    const togglePasswordBtn = document.getElementById('togglePassword');
-    const passwordInput = document.getElementById('password');
 
-    togglePasswordBtn.addEventListener('click', function () {
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        togglePasswordBtn.textContent = type === 'password' ? 'Show' : 'Hide';
-    });
-</script> -->
 
 {% endblock body %}
 

@@ -6,25 +6,26 @@
 {% endblock head %}
 
 {% block body %}
+
+{% comment %} {% if error %} {% endcomment %}
+    <div>
+        <h2> {{error}} </h2>
+    </div>
+{% comment %} {% endif %} {% endcomment %}
+
 <div class="container_div">
     <div class="Contact_Us_Form_div">
         <h1>Login</h1>
         <br>
-        <form action="login_process.php" method="post">
-            <!-- <p>Username:</p> -->
-            <input type="text" name="username" placeholder="Username">
-            <!-- <p>Password:</p> -->
+        <form action="{% url 'validate' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="phone_no" placeholder="Phone Number">
             <input type="password" name="password" placeholder="Password">
             <input type="submit" value="Login">
-            <p style="margin-bottom: 100px;">New to Ridease? <a  href="signup.html">Sign up here</a></p>
+            <p style="margin-bottom: 100px;">New to Ridease? <a  href="{% url 'signup' %}">Sign up here</a></p>
         </form>
     </div>
 
-    <div class="Contact_Us_Address_div">
-        <img src="{% static "photos/address_icon.png" %}" alt="address icon">
-        <h4>Contact Us</h4>
-        <p>Email: info@example.com</p>
-        <p>Phone: +1234567890</p>
-    </div>
+
 </div>
 {% endblock body %}
