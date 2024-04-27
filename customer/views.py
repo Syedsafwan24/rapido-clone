@@ -31,6 +31,9 @@ def success(request):
 def adminlogin(request):
     return render(request, "adminlogin.html")
 
+def driverLogin(request):
+    return render(request, "driverLogin.html")
+
 def addUser(request):
     if request.method == 'POST':
         fullname = request.POST.get('fullname')
