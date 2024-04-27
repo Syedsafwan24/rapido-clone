@@ -27,16 +27,19 @@
                     downloads. We are now running <br> operations in more than 100 cities.
                 </p>
                 <div class="page_one_text_button">
-                    <a href="login.html">
+                    <a href="{% url 'login' %}">
                         <button><span>Request for a ride</span></button>
                     </a>
-                    <button id="black_btn"> <span>Sign-up as Driver<span></button>
+                    <a href="{% url 'adminlogin' %}">
+                        <button id="black_btn"> <span>Login as Driver<span></button>
+                    </a>
                 </div>
             </div>
 
             <div id="Page_one_Iamge">
-                <a href="Safety.html" target="_blank"> 
-                <img src="{% static "Photos/safety_guideline.png" %}" width="100%">  </a>
+                <a href="{% url 'safety' %}" target="_blank" > 
+                    <img src="{% static "Photos/safety_guideline.png" %}" width="100%">  
+                </a>
             </div>
 
         </div>
@@ -71,7 +74,7 @@
         <div class="page_three">
 
             <div class="page_three_circle">
-                <h1> Our Imapct </h1> <br>
+                <h1> Our Impact </h1> <br>
                 <p> Our presence in the country has changed the concept of intra-city travel and <br> made last-mile
                     connectivity affordable for all.</p>
 
@@ -98,7 +101,7 @@
                     <div class="page_three_images">
                         <img src="{% static "Photos/presence_4.webp" %}">
                         <h3>10M +</h3>
-                        <p>customers</p>
+                        <p>Customers</p>
                     </div>
                 </div>
             </div>
@@ -106,4 +109,4 @@
 
         
     </div>
-    {% endblock body %}
+{% endblock body %}

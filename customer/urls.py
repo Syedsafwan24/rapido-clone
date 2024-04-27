@@ -4,16 +4,16 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("Index.html",views.index, name="index"),
-    path("About_Us.html", views.aboutus, name="aboutus"),
-    path("Contact Us.html", views.contactus,name="contactus"),
-    path("Safety.html",views.safety,name="safety"),
-    path("login.html",views.login,name="login"),
-    path("signup.html",views.signup,name="signup"),
+    path("index",views.index, name="index"),
+    path("aboutUs", views.aboutus, name="aboutus"),
+    path("contactUs", views.contactus,name="contactus"),
+    path("safety",views.safety,name="safety"),
+    path("login",views.login,name="login"),
+    path("signUp",views.signup,name="signup"),
     path("addUser", views.addUser, name="addUser"),
-    path("afterlogin", views.validateUser, name="validate"),
+    path("afterLogin", views.validateUser, name="validate"),
     path("success", views.success, name="success_page"),
-    path("Admin", views.adminlogin, name="adminlogin"),
-    path("AddDriver", views.addDriver, name="addDriver"),
-    path("addcontact", views.contact_us, name="addcontact")
+    path("admin", views.adminlogin, name="adminlogin"),
+    path("addDriver", views.addDriver, name="addDriver"),
+    path("addContact", views.contact_us, name="addcontact")
 ]

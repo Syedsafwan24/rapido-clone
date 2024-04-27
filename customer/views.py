@@ -1,3 +1,4 @@
+from genericpath import exists
 from django import views
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -41,11 +42,21 @@ def addUser(request):
         confirm_password = request.POST.get('confirm_password')
         
         # Check if passwords match
+        # Handle password mismatch error
         if password != confirm_password:
-            # Handle password mismatch error
             return render(request, 'signup.html', {'error': 'Passwords do not match'})
-
+        
+        if len(phone_no) < 10 or len(phone_no) > 10:
+            return render(request, 'signup.html', {'error': f'Invalid Phone Number!'})
+        
+        if User.objects.filter(phone_no=phone_no).exists():
+            return render(request, 'signup.html', {'error': f'The Phone Number {phone_no} has already been used '})
+        
+        if User.objects.filter(email=email).exists():
+            return render(request, 'signup.html', {'error': f'The Email Address {email} has already been used.'})
         # Create the user object
+        
+        
         user = User.objects.create(
             fullname=fullname,
             phone_no=phone_no,

@@ -1,19 +1,16 @@
 {% extends "nav.html" %}
-
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 {% block head %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request a Ride</title>
     <link rel="stylesheet" href="{% static 'success.css' %}">
 {% endblock head %}
 
+
 {% block body %}
-<body>
-    <div class="request-ride-container">
+    <div style="margin-top:120px;" class="request-ride-container">
         <h1>Request a Ride</h1>
         <p> Fill out the form below to book your ride.</p>
         <form action="/submit-ride-request" method="post">

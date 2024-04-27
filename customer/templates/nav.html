@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <link rel="shortcut icon" href="{% static "photos/Re-short-logo.png"%}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'photos/Re-short-logo.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'index.css' %}">
     <title>RIDEASE | TravelEasy</title>
 </head>
@@ -17,12 +17,16 @@
 
     <div class="navbar_sticky" id="navbar">
         <div class="navbar">
+<<<<<<< HEAD
             <img src="{% static "photos/RIDEEASE.png" %}" alt="RideEase Logo">
+=======
+            <img src="{% static 'Photos/RIDEEASE.png' %}" alt="RideEase Logo">
+>>>>>>> 2aeabdc1ed2fccff001e7895b87101584eaa2ffe
             <ul>
-                <li> <a href="Index.html">Home</a> </li>
-                <li> <a href="About_Us.html"> About Us</a> </li>
-                <li> <a href="Safety.html"> Safety </a> </li>
-                <li> <a href="Contact Us.html"> Contact Us </a> </li>
+                <li> <a href="{% url 'index' %}">Home</a> </li>
+                <li> <a href="{% url 'aboutus' %}"> About Us</a> </li>
+                <li> <a href="{% url 'safety' %}"> Safety </a> </li>
+                <li> <a href="{% url 'contactus' %}"> Contact Us </a> </li>
                 <li> <a href="{% url 'adminlogin' %}">Admin </a></li>
             </ul>
         </div>
@@ -37,11 +41,10 @@
 
             <div class="div3">
                 <br>
-                <a href="Index.html">Home</a> <br> <br>
-                <a href="About_Us.html">About Us</a><br><br>
-                <a href="Safety.html">Safety</a><br><br> 
-                <!-- <a href=".html"></a><br><br> -->
-                <a href="Contact Us.html">Contact Us</a><br><br>
+                <a href="{% url 'index' %}">Home</a> <br> <br>
+                <a href="{% url 'aboutus' %}">About Us</a><br><br>
+                <a href="{% url 'safety' %}">Safety</a><br><br> 
+                <a href="{% url 'contactus' %}">Contact Us</a><br><br>
             </div>
 
             <div class="div4">
@@ -76,6 +79,6 @@
             </div>
         </div>
     </div>
-    <!-- Fotter close  -->
+    <!-- Footer close  -->
 </body>
 </html>

@@ -12,16 +12,25 @@
     {% endblock head %}
 {% block body %}
 
-<div class="container_div">
+<div class="container_div" style="margin-top:140px;">
     <div class="Contact_Us_Form_div">
+        {% if error %}
+            <h4 style="color:red;">{{ error }} </h4>
+        {% endif %}
         <h1>Sign Up</h1>
         <br>
         <form action="{% url 'addUser' %}" method="post">
             {% csrf_token %}
             <input type="text" name="fullname" placeholder="Enter your full name" required>
+<<<<<<< HEAD
             <input type="Number" name="phone_no" placeholder="Enter your Phone Number" required>
             <select name="gender" id="gender" required>
                 <option value="" disabled selected required>Select your gender</option>
+=======
+            <input type="text" name="phone_no" placeholder="Enter your Phone Number" required>
+            <select name="gender" id="gender" required aria-required="true">
+                <option value="" disabled selected>Select your gender</option>
+>>>>>>> 2aeabdc1ed2fccff001e7895b87101584eaa2ffe
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
