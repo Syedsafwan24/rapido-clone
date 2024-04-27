@@ -5,8 +5,7 @@
 <!-- Optional: Add custom CSS here -->
 <link rel="stylesheet" href="{% static 'dashboard.css' %}">
 <style>
-    
-    
+    /* You can add additional internal styles here */
 </style>
 {% endblock head %}
 
@@ -19,7 +18,7 @@
 </head>
 <body>
 {% block body %}
-    <div class="dashboard-main" style="margin-top:120px; border-radius:8px;" >
+    <div class="dashboard-main" style="margin-top:120px; border-radius:8px;">
         <header class="dashboard-header">
             <h1>Welcome, {{ driver.name }}</h1>
             <div class="driver-availability">
@@ -31,15 +30,15 @@
         <section class="dashboard-overview">
             <div class="info-card">
                 <h2>Total Earnings</h2>
-                <p>₹{{ driver.earnings.total }}</p>
+                <p>₹0{{ driver.earnings.total }}</p>
             </div>
             <div class="info-card">
                 <h2>Rides Today</h2>
-                <p>{{ driver.rides.today_count }}</p>
+                <p>0{{ driver.rides.today_count }}</p>
             </div>
             <div class="info-card">
                 <h2>Rating</h2>
-                <p>{{ driver.rating }}</p>
+                <p>0{{ driver.rating }}</p>
             </div>
         </section>
 
@@ -55,6 +54,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Static entry for specific ride details -->
+                    <tr>
+                        <td>Azad Nagar</td>
+                        <td>Bunder Road</td>
+                        <td>₹100</td>
+                        <td>
+                            <button onclick="acceptRide('static_ride')">Accept</button>
+                            <button onclick="declineRide('static_ride')">Decline</button>
+                        </td>
+                    </tr>
+                    <!-- Dynamic entries from the ride_requests data -->
                     {% for request in ride_requests %}
                     <tr>
                         <td>{{ request.pickup_location }}</td>

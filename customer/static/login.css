@@ -65,8 +65,7 @@
     box-sizing: border-box;
 }
 
-.Contact_Us_Form_div input[type=submit]
-.Contact_Us_Form_div input[type=button]
+input[type=submit]
  {
     width: 75%;
     background-color: #D24545;
@@ -81,7 +80,7 @@
     /* margin-bottom: 100px; */
 }
 
-.Contact_Us_Form_div input[type=submit]:hover {
+input[type=submit]:hover {
     background-color: #bc3131;
 }
 

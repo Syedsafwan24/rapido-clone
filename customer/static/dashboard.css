@@ -84,32 +84,22 @@ button {
   color: white;
   cursor: pointer;
   margin-right: 10px;
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
 }
 
 button:hover {
   background-color: #bc3131; /* Darker on hover */
 }
 
-/* Footer Styles */
-.dashboard-footer {
-  padding: 20px;
-  text-align: center;
-  background: #ddd; /* Light gray background */
+/* Availability Toggle Animation */
+.availability-toggle {
   position: relative;
-  bottom: 0;
-  width: 100%;
+  display: inline-block;
+  cursor: pointer;
 }
 
-/* Responsive Layouts */
-@media (max-width: 768px) {
-  .dashboard-main {
-      width: 95%;
-  }
-
-  .info-card {
-      width: 100%; /* Full width for mobile */
-      margin-bottom: 10px;
-  }
+.availability-toggle input {
+  display: none;
 }
 
 /* Basic styling for demonstration */
