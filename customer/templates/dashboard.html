@@ -1,0 +1,107 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block head %}
+<!-- Optional: Add custom CSS here -->
+<link rel="stylesheet" href="{% static 'static/dashboard.css' %}">
+<style>
+    /* Basic styling for demonstration */
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    
+</style>
+{% endblock head %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Dashboard - Ridease</title>
+</head>
+<body>
+{% block body %}
+    <div class="dashboard-main">
+        <header class="dashboard-header">
+            <h1>Welcome, {{ driver.name }}</h1>
+            <div class="driver-availability">
+                <label>Available for Rides:</label>
+                <input type="checkbox" id="availabilityToggle" {% if driver.is_available %}checked{% endif %} onchange="toggleAvailability()">
+            </div>
+        </header>
+
+        <section class="dashboard-overview">
+            <div class="info-card">
+                <h2>Total Earnings</h2>
+                <p>₹{{ driver.earnings.total }}</p>
+            </div>
+            <div class="info-card">
+                <h2>Rides Today</h2>
+                <p>{{ driver.rides.today_count }}</p>
+            </div>
+            <div class="info-card">
+                <h2>Rating</h2>
+                <p>{{ driver.rating }}</p>
+            </div>
+        </section>
+
+        <section class="ride-requests">
+            <h2>Incoming Ride Requests</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Fare</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in ride_requests %}
+                    <tr>
+                        <td>{{ request.from_location }}</td>
+                        <td>{{ request.to_location }}</td>
+                        <td>₹{{ request.estimated_fare }}</td>
+                        <td>
+                            <button onclick="acceptRide({{ request.id }})">Accept</button>
+                            <button onclick="declineRide({{ request.id }})">Decline</button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4">No incoming requests.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <footer class="dashboard-footer">
+            <p>Contact Support if you need help!</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleAvailability() {
+            var checkBox = document.getElementById("availabilityToggle");
+            console.log("Driver availability toggled:", checkBox.checked);
+        }
+
+        function acceptRide(requestId) {
+            console.log("Accepting ride:", requestId);
+            // Additional actions can be added here if needed
+        }
+
+        function declineRide(requestId) {
+            console.log("Declining ride:", requestId);
+            // Additional actions can be added here if needed
+        }
+    </script>
+{% endblock body %}
+</body>
+</html>
