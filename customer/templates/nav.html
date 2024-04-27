@@ -15,7 +15,7 @@
 </head>
 <body>
 
-    <div class="navbar_sticky" id="navbar">
+    {% comment %} <div class="navbar_sticky" id="navbar">
         <div class="navbar">
             <img src="{% static 'Photos/RIDEEASE.png' %}" alt="RideEase Logo">
             <ul>
@@ -26,7 +26,7 @@
                 <li> <a href="{% url 'adminlogin' %}">Admin </a></li>
             </ul>
         </div>
-    </div>
+    </div> {% endcomment %}
 
     {% block body %}
     {% endblock body %}

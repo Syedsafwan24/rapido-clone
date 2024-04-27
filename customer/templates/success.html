@@ -1,39 +1,49 @@
 {% extends "nav.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-{% block head %}
+    {% block head %}
     <title>Request a Ride</title>
     <link rel="stylesheet" href="{% static 'success.css' %}">
-{% endblock head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <!-- Be sure to load Bootstrap JavaScript -->
 
+    {% endblock head %}
 
 {% block body %}
+
+{% if success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong> {{ success }} </strong> 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+
+{% if warning %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{ warning }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endif %}
+
     {% if user %}
-    
     <h1 style="margin-top:120px; text-align:center; color:black;">Welcome ,{{user.fullname}} </h1>
     {% endif %}
-    <div  class="request-ride-container">
-        {% if success %}
-            <script>
-                <div class="alert alert-success" role="alert">
-                    {{ success }}
-                </div>
-            </script>
-        {% endif %}
 
-        {% if warning %}
-            <script>
-                <div class="alert alert-info" role="alert">
-                    {{ warning }}
-                </div>
-            </script>
-        {% endif %}
+    <div  class="request-ride-container">
 
         <h1>Request a Ride</h1>
         <p>Fill out the form below to book your ride.</p>
+        
         <form action="{% url 'submit-ride-request' %}" method="post">
             {% csrf_token %}
             <!-- Hidden input field to pass the user object -->
