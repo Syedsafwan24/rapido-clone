@@ -31,7 +31,7 @@ class DriverDetails(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     address = models.CharField(max_length=150)
-
+    password = models.CharField(max_length=150)
     # Identification
     license = models.CharField(max_length=20)
     vehicle_reg = models.CharField(max_length=20)
