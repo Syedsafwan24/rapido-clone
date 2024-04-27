@@ -1,19 +1,21 @@
+{% extends "nav.html" %}
+
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+{% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request a Ride</title>
     <link rel="stylesheet" href="{% static 'success.css' %}">
-</head>
+{% endblock head %}
 
-
+{% block body %}
 <body>
     <div class="request-ride-container">
         <h1>Request a Ride</h1>
-        <p>Fill out the form below to book your ride.</p>
+        <p> Fill out the form below to book your ride.</p>
         <form action="/submit-ride-request" method="post">
             <div class="form-group">
                 <label for="pickup-location">Pick-up Location:</label>
@@ -38,5 +40,4 @@
             <button type="submit" class="req">Request Ride</button>
         </form>
     </div>
-</body>
-</html>
+{% endblock body %}
