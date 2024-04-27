@@ -84,30 +84,62 @@ button {
   color: white;
   cursor: pointer;
   margin-right: 10px;
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
 }
 
 button:hover {
   background-color: #bc3131; /* Darker on hover */
 }
 
-/* Footer Styles */
-.dashboard-footer {
-  padding: 20px;
-  text-align: center;
-  background: #ddd; /* Light gray background */
+/* Availability Toggle Animation */
+.availability-toggle {
   position: relative;
-  bottom: 0;
-  width: 100%;
+  display: inline-block;
+  cursor: pointer;
 }
 
-/* Responsive Layouts */
-@media (max-width: 768px) {
-  .dashboard-main {
-      width: 95%;
-  }
-
-  .info-card {
-      width: 100%; /* Full width for mobile */
-      margin-bottom: 10px;
-  }
+.availability-toggle input {
+  display: none;
 }
+
+.toggle-slider {
+  width: 50px;
+  height: 25px;
+  background-color: #ccc;
+  border-radius: 25px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-slider:before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+input:checked + .toggle-slider {
+  background-color: #D24545; /* Red color when toggled */
+}
+
+input:checked + .toggle-slider:before {
+  transform: translate(25px, -50%); /* Move to the right when toggled */
+}
+
+    /* Basic styling for demonstration */
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    
