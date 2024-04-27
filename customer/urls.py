@@ -15,5 +15,6 @@ urlpatterns = [
     path("success", views.success, name="success_page"),
     path("admin", views.adminlogin, name="adminlogin"),
     path("addDriver", views.addDriver, name="addDriver"),
-    path("addContact", views.contact_us, name="addcontact")
+    path("addContact", views.contact_us, name="addcontact"),
+    path("driverLogin", views.driverLogin, name="driverLogin"),
 ]
