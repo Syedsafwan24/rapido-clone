@@ -3,18 +3,9 @@
 
 {% block head %}
 <!-- Optional: Add custom CSS here -->
-<link rel="stylesheet" href="{% static 'static/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
 <style>
-    /* Basic styling for demonstration */
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 10px;
-        text-align: left;
-    }
-    th {
-        background-color: #f2f2f2;
-    }
+    
     
 </style>
 {% endblock head %}
@@ -28,7 +19,7 @@
 </head>
 <body>
 {% block body %}
-    <div class="dashboard-main">
+    <div class="dashboard-main" style="margin-top:120px; border-radius:8px;" >
         <header class="dashboard-header">
             <h1>Welcome, {{ driver.name }}</h1>
             <div class="driver-availability">

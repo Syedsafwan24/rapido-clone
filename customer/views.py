@@ -1,9 +1,11 @@
-from genericpath import exists
-from django import views
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import User,ContactQuery
+import random
+from .models import DriverDetails,RideRequest
+from datetime import datetime
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -42,6 +44,61 @@ def sendOTP(request):
 
 def validateOTP(request):
     pass
+
+
+
+def submitRideRequest(request):
+    if request.method == 'POST':
+        # Retrieve form data from POST request
+        user_id = request.POST.get('user_id')
+        pickup_location = request.POST.get('pickup_location')
+        dropoff_location = request.POST.get('dropoff_location')
+        
+        # Get current date and time
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+        
+        try:
+            # Convert current time string to datetime object
+            pickup_time = datetime.strptime(current_time, "%Y-%m-%d %H:%M")
+        except ValueError:
+            # Handle invalid time format
+            return HttpResponse("Invalid time format")
+        
+        ride_type = request.POST.get('ride_type')
+        
+        # Get all available drivers
+        available_drivers = DriverDetails.objects.filter(available=True)
+        
+        # Store ride request data in each available driver's ride_request_data field
+        for driver in available_drivers:
+            # Create a new instance of RideRequest
+            ride_request = RideRequest.objects.create(
+                user_id=user_id,
+                pickup_location=pickup_location,
+                dropoff_location=dropoff_location,
+                pickup_time=pickup_time,
+                ride_type=ride_type,
+                driver=driver  # Assuming there's a ForeignKey field named 'driver' in RideRequest model
+            )
+            
+        try:
+            user = User.objects.get(fullname=user_id)
+        except User.DoesNotExist:
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
+        
+        if not available_drivers:
+            return render(request, 'success.html',{"user" : user,"warning":"Sorry Currently there is no available Rides"})
+            # Save the ride request instance
+        ride_request.save()
+        # Redirect the user to a success page
+        return render(request, 'success.html',{"user" : user,"success":"Your Request has been Sent."})
+    else:
+        # Handle case where method is not POST
+        return render(request, 'ride_request_form.html')
+
+
+def dashboard(request):
+    return render(request, template_name="dashboard.html")
 
 def addUser(request):
     if request.method == 'POST':
@@ -87,41 +144,25 @@ def addUser(request):
         return render(request, 'signup.html')
     
 
-# def validateUser(request):
-#     if request.method == 'post':
-#         phone_no = request.POST.get('phone_no')
-#         password = request.POST.get('password')
-        
+
 def validateUser(request):
-    
     if request.method == 'POST':
-        print("here dd")
         phone_no = request.POST.get('phone_no')
         password = request.POST.get('password')
-        print(password)
-        print(phone_no)
-        # Query the User model based on the provided phone number
+        
         try:
             user = User.objects.get(phone_no=phone_no)
         except User.DoesNotExist:
-            # Handle case where user with given phone number does not exist
             return render(request, 'login.html', {'error': 'Invalid credentials'})
-        print(user)
-        print(user.password)
-        # Check if the provided password matches the user's password in the database
+        
         if password != user.password:
-            # Handle case where passwords do not match
             return render(request, 'login.html', {'error': 'Invalid credentials'})
-        print("here also")
-        # Redirect to a success page or another URL
-        return HttpResponseRedirect(reverse('success_page'))
+        
+        # Pass user data to the success.html template
+        return render(request, 'success.html', {'user': user})
     else:
-        print("here")
-        # Handle case where method is not POST
         return render(request, 'login.html')
-    
-from django.shortcuts import render, redirect
-from .models import DriverDetails
+
 
 def addDriver(request):
     if request.method == 'POST':
