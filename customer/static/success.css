@@ -59,7 +59,7 @@ select {
   border-radius: 4px;
   background-color: white;
 }
-button{
+.req{
   width: 150px;
   height: 50px;
   background-color: #D24545;
@@ -73,6 +73,6 @@ button{
   cursor: pointer;
 
 }
-button:hover {
+.req:hover {
   background-color: #bc3131;
 }

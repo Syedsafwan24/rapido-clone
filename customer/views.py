@@ -53,19 +53,16 @@ def validateDriver(request):
         # Assuming you have a boolean field named 'available' in your DriverDetails model
         if driver.available:
             # Render the dashboard.html template passing the driver object
+            print(f"hereeee {driver.available}")
             return render(request, 'dashboard.html', {'driver': driver,"ride_requests": ride_requests})
         else:
             # Render a template indicating that the driver is not available
-            return render(request, 'driverLogin.html', {'driver': driver,"ride_requests": ride_requests,"error": "Sorry no available rides"})
+            print(f"here {driver.available}")
+            return render(request, 'driverLogin.html', {'driver': driver,"ride_requests": ride_requests})
     else:
         # Handle case where method is not POST
         return redirect('driverLogin')
 
-def sendOTP(request):
-    pass
-
-def validateOTP(request):
-    pass
 
 from datetime import datetime
 from django.shortcuts import render, redirect
@@ -96,11 +93,11 @@ def submitRideRequest(request):
         
         # Get all available drivers
         available_drivers = DriverDetails.objects.filter(available=True)
-        print(available_drivers)
+        # print(available_drivers)
         # Check if there are available drivers
         if not available_drivers:
-            return render(request, 'success.html', {'user':user,'warning': 'Sorry, currently there are no available drivers.'})
-        
+            print(f"here {available_drivers}")
+            return render(request, 'success.html', {'user':user,'warning': 'Sorry, currently there are no available rides.'})
         
         # Store ride request data in each available driver's ride_request field
         for driver in available_drivers:
@@ -115,6 +112,7 @@ def submitRideRequest(request):
             )
             # Assign the ride request to the driver
             driver.ride_request = ride_request
+            print(driver)
             driver.save()
             
         # Redirect the user to a success page
