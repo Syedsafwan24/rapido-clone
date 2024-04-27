@@ -30,7 +30,7 @@ class DriverDetails(models.Model):
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     phone = models.CharField(max_length=15)
     email = models.EmailField()
-    address = models.TextField()
+    address = models.CharField(max_length=150)
 
     # Identification
     license = models.CharField(max_length=20)
@@ -60,7 +60,12 @@ class RideRequest(models.Model):
     pickup_location = models.CharField(max_length=100)
     dropoff_location = models.CharField(max_length=100)
     pickup_time = models.DateTimeField()
-    ride_type = models.CharField(max_length=50)
+    RIDE_CHOICES = [
+        ('Standard', 'Stamdard'),
+        ('Premium', 'Premium'),
+    ]
+    ride_type = models.CharField(max_length=50,choices=RIDE_CHOICES)
+    phone = models.CharField(max_length=15)
 
 class ContactQuery(models.Model):
     name = models.CharField(max_length=100)

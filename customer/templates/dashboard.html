@@ -57,9 +57,9 @@
                 <tbody>
                     {% for request in ride_requests %}
                     <tr>
-                        <td>{{ request.from_location }}</td>
-                        <td>{{ request.to_location }}</td>
-                        <td>₹{{ request.estimated_fare }}</td>
+                        <td>{{ request.pickup_location }}</td>
+                        <td>{{ request.dropoff_location }}</td>
+                        <td>₹ 230 </td>
                         <td>
                             <button onclick="acceptRide({{ request.id }})">Accept</button>
                             <button onclick="declineRide({{ request.id }})">Decline</button>

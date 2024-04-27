@@ -45,7 +45,9 @@ def sendOTP(request):
 def validateOTP(request):
     pass
 
-
+from datetime import datetime
+from django.shortcuts import render, redirect
+from .models import User, DriverDetails, RideRequest
 
 def submitRideRequest(request):
     if request.method == 'POST':
@@ -53,52 +55,59 @@ def submitRideRequest(request):
         user_id = request.POST.get('user_id')
         pickup_location = request.POST.get('pickup_location')
         dropoff_location = request.POST.get('dropoff_location')
+        ride_type = request.POST.get('ride_type')
         
         # Get current date and time
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+        try:
+            user = User.objects.get(fullname=user_id)
+        except User.DoesNotExist:
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
         
         try:
             # Convert current time string to datetime object
             pickup_time = datetime.strptime(current_time, "%Y-%m-%d %H:%M")
         except ValueError:
             # Handle invalid time format
-            return HttpResponse("Invalid time format")
+            return render(request, 'success.html', {'user':user,'message': 'Invalid time format'})
         
-        ride_type = request.POST.get('ride_type')
         
         # Get all available drivers
         available_drivers = DriverDetails.objects.filter(available=True)
+        print(available_drivers)
+        # Check if there are available drivers
+        if not available_drivers:
+            return render(request, 'success.html', {'user':user,'warning': 'Sorry, currently there are no available drivers.'})
         
-        # Store ride request data in each available driver's ride_request_data field
+        
+        # Store ride request data in each available driver's ride_request field
         for driver in available_drivers:
-            # Create a new instance of RideRequest
+            # Create a new instance of RideRequest for each available driver
             ride_request = RideRequest.objects.create(
-                user_id=user_id,
+                user=user,
                 pickup_location=pickup_location,
                 dropoff_location=dropoff_location,
                 pickup_time=pickup_time,
                 ride_type=ride_type,
-                driver=driver  # Assuming there's a ForeignKey field named 'driver' in RideRequest model
+                phone = user.phone_no
             )
+            # Assign the ride request to the driver
+            driver.ride_request = ride_request
+            driver.save()
             
-        try:
-            user = User.objects.get(fullname=user_id)
-        except User.DoesNotExist:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
-        
-        if not available_drivers:
-            return render(request, 'success.html',{"user" : user,"warning":"Sorry Currently there is no available Rides"})
-            # Save the ride request instance
-        ride_request.save()
         # Redirect the user to a success page
-        return render(request, 'success.html',{"user" : user,"success":"Your Request has been Sent."})
+        return render(request, 'success.html', {'user':user,'success': 'Your ride request has been sent.'})
     else:
         # Handle case where method is not POST
         return render(request, 'ride_request_form.html')
 
 
 def dashboard(request):
-    return render(request, template_name="dashboard.html")
+    # Query the RideRequest model to get all incoming ride requests
+    ride_requests = RideRequest.objects.all()
+    # print(ride_requests)
+    # Pass the ride_requests data to the template
+    return render(request, 'dashboard.html', {'ride_requests': ride_requests})
 
 def addUser(request):
     if request.method == 'POST':
@@ -182,7 +191,7 @@ def addDriver(request):
         vehicle_model = request.POST.get('vehicle_model')
         vehicle_color = request.POST.get('vehicle_color')
         agreement = request.POST.get('agreement') == 'on'
-
+        print(address)
         # Create a new DriverDetails object
         driver = DriverDetails.objects.create(
             fullname=fullname,

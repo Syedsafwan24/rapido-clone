@@ -11,7 +11,10 @@
 
 
 {% block body %}
-<h1 style="margin-top:120px; text-align:center; color:black;">Welcome ,{{user.fullname}} </h1>
+    {% if user %}
+    
+    <h1 style="margin-top:120px; text-align:center; color:black;">Welcome ,{{user.fullname}} </h1>
+    {% endif %}
     <div  class="request-ride-container">
         {% if success %}
             <script>
