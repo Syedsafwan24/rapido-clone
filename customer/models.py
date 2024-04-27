@@ -45,13 +45,22 @@ class DriverDetails(models.Model):
     vehicle_make = models.CharField(max_length=50)
     vehicle_model = models.CharField(max_length=50)
     vehicle_color = models.CharField(max_length=20)
-
+    available = models.BooleanField(default=False)
+    ride_request_data = models.TextField(blank=True, null=True)
     # Agreement
     agreement = models.BooleanField()
+    ride_request = models.OneToOneField('RideRequest', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.fullname
 
+
+class RideRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pickup_location = models.CharField(max_length=100)
+    dropoff_location = models.CharField(max_length=100)
+    pickup_time = models.DateTimeField()
+    ride_type = models.CharField(max_length=50)
 
 class ContactQuery(models.Model):
     name = models.CharField(max_length=100)

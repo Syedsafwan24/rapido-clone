@@ -9,11 +9,33 @@
 {% endblock head %}
 
 
+
 {% block body %}
-    <div style="margin-top:120px;" class="request-ride-container">
+<h1 style="margin-top:120px; text-align:center; color:black;">Welcome ,{{user.fullname}} </h1>
+    <div  class="request-ride-container">
+        {% if success %}
+            <script>
+                <div class="alert alert-success" role="alert">
+                    {{ success }}
+                </div>
+            </script>
+        {% endif %}
+
+        {% if warning %}
+            <script>
+                <div class="alert alert-info" role="alert">
+                    {{ warning }}
+                </div>
+            </script>
+        {% endif %}
+
         <h1>Request a Ride</h1>
         <p>Fill out the form below to book your ride.</p>
-        <form action="/submit-ride-request" method="post">
+        <form action="{% url 'submit-ride-request' %}" method="post">
+            {% csrf_token %}
+            <!-- Hidden input field to pass the user object -->
+            <input type="hidden" name="user_id" value="{{ user }}">
+            
             <div class="form-group">
                 <label for="pickup-location">Pick-up Location:</label>
                 <input type="text" id="pickup-location" name="pickup_location" required>
@@ -31,11 +53,9 @@
                 <select id="ride-type" name="ride_type">
                     <option value="standard">Standard</option>
                     <option value="premium">Premium</option>
-                   
                 </select>
             </div>
             <button type="submit" class="req">Request Ride</button>
         </form>
     </div>
 {% endblock body %}
-
