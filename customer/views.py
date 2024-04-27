@@ -56,7 +56,7 @@ def validateDriver(request):
             return render(request, 'dashboard.html', {'driver': driver,"ride_requests": ride_requests})
         else:
             # Render a template indicating that the driver is not available
-            return render(request, 'unavailable.html', {'driver': driver})
+            return render(request, 'driverLogin.html', {'driver': driver,"ride_requests": ride_requests,"error": "Sorry no available rides"})
     else:
         # Handle case where method is not POST
         return redirect('driverLogin')
