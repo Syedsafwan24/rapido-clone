@@ -6,43 +6,22 @@
 {% endblock head %}
 
 {% block body %}
-
 <div class="container_div">
     {% if error %}
-    <div style="margin-top: 20px; color: red;">
-        <h4>{{ error }}</h4>     
+    <div style="margin-top:100px; color:red; margin-left:75px;">
+        <h4> {{error}} </h4>     
     </div>
     {% endif %}
     <div class="Contact_Us_Form_div">
         <h1>Login</h1>
         <br>
-        <form id="loginForm" action="{% url 'validateDriver' %}" method="post">
+        <form action="{% url 'validateDriver' %}" method="post">
             {% csrf_token %}
-            <input type="tel" id="phone_number" name="phone_number" placeholder="Phone Number" required>
-            <button type="button" id="sendOTPButton" onclick="sendOTP()">Send OTP</button>
-        </form>
-        <br>
-        <form id="otpVerificationForm" style="display: none;" action="{% url 'validateOTP' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" id="otp_phone_number" name="phone_number">
-            <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
+            <input type="text" name="phone_no" placeholder="Phone Number" required>
+            <input type="password" name="password" placeholder="Password" required>
             <input type="submit" value="Login">
         </form>
-        
-        <br>
-        {% comment %} <p style="margin-top: 20px;">New to Ridease? <a href="{% url 'signup' %}">Sign up here</a></p> {% endcomment %}
     </div>
+    
 </div>
-
-<script>
-    function sendOTP() {
-        var phoneNumber = document.getElementById('phone_number').value;
-        // You can perform AJAX call here to send OTP to the provided phone number
-        // For demonstration purposes, let's assume the OTP is sent successfully
-        document.getElementById('otp_phone_number').value = phoneNumber;
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('otpVerificationForm').style.display = 'block';
-    }
-</script>
-
 {% endblock body %}

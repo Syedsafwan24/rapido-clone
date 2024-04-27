@@ -36,8 +36,30 @@ def adminlogin(request):
 def driverLogin(request):
     return render(request, "driverLogin.html")
 
+from django.shortcuts import render, redirect
+from .models import DriverDetails
+
 def validateDriver(request):
-    pass
+    if request.method == 'POST':
+        phone_no = request.POST.get('phone_no')
+        password = request.POST.get('password')
+        
+        ride_requests = RideRequest.objects.all()
+        try:
+            driver = DriverDetails.objects.get(phone=phone_no, password=password)
+        except DriverDetails.DoesNotExist:
+            return render(request, 'driverLogin.html', {'error': 'Invalid credentials'})
+        
+        # Assuming you have a boolean field named 'available' in your DriverDetails model
+        if driver.available:
+            # Render the dashboard.html template passing the driver object
+            return render(request, 'dashboard.html', {'driver': driver,"ride_requests": ride_requests})
+        else:
+            # Render a template indicating that the driver is not available
+            return render(request, 'unavailable.html', {'driver': driver})
+    else:
+        # Handle case where method is not POST
+        return redirect('driverLogin')
 
 def sendOTP(request):
     pass
@@ -190,6 +212,13 @@ def addDriver(request):
         vehicle_make = request.POST.get('vehicle_make')
         vehicle_model = request.POST.get('vehicle_model')
         vehicle_color = request.POST.get('vehicle_color')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('Comfirm_password')
+        
+        if confirm_password != password : 
+            return render(request, 'adminlogin.html',{
+                "error": "Password Didn't match!"
+            })
         agreement = request.POST.get('agreement') == 'on'
         print(address)
         # Create a new DriverDetails object
