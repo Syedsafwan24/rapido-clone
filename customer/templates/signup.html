@@ -12,8 +12,11 @@
     {% endblock head %}
 {% block body %}
 
-<div class="container_div">
+<div class="container_div" style="margin-top:140px;">
     <div class="Contact_Us_Form_div">
+        {% if error %}
+            <h4 style="color:red;">{{ error }} </h4>
+        {% endif %}
         <h1>Sign Up</h1>
         <br>
         <form action="{% url 'addUser' %}" method="post">
