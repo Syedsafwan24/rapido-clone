@@ -102,49 +102,6 @@ button:hover {
   display: none;
 }
 
-<<<<<<< HEAD
-.toggle-slider {
-  width: 50px;
-  height: 25px;
-  background-color: #ccc;
-  border-radius: 25px;
-  position: relative;
-  transition: background-color 0.3s ease;
-}
-
-.toggle-slider:before {
-  content: '';
-  width: 20px;
-  height: 20px;
-  background-color: #fff;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  transform: translateY(-50%);
-  transition: transform 0.3s ease;
-}
-
-input:checked + .toggle-slider {
-  background-color: #D24545; /* Red color when toggled */
-}
-
-input:checked + .toggle-slider:before {
-  transform: translate(25px, -50%); /* Move to the right when toggled */
-}
-
-    /* Basic styling for demonstration */
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 10px;
-        text-align: left;
-    }
-    th {
-        background-color: #f2f2f2;
-    }
-    
-=======
 /* Basic styling for demonstration */
 table, th, td {
   border: 1px solid black;
@@ -155,4 +112,3 @@ table, th, td {
 th {
   background-color: #f2f2f2;
 }
->>>>>>> 380dd9a9784427d1e003f340f0d572901b10f1ef
