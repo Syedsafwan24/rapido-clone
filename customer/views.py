@@ -34,6 +34,15 @@ def adminlogin(request):
 def driverLogin(request):
     return render(request, "driverLogin.html")
 
+def validateDriver(request):
+    pass
+
+def sendOTP(request):
+    pass
+
+def validateOTP(request):
+    pass
+
 def addUser(request):
     if request.method == 'POST':
         fullname = request.POST.get('fullname')

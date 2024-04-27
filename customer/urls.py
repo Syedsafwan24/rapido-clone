@@ -17,4 +17,7 @@ urlpatterns = [
     path("addDriver", views.addDriver, name="addDriver"),
     path("addContact", views.contact_us, name="addcontact"),
     path("driverLogin", views.driverLogin, name="driverLogin"),
+    path("validateDriver", views.validateDriver, name="validateDriver"),
+    path("sendOTP", views.sendOTP, name="sendOTP"),
+    path("validateOTP", views.validateOTP, name="validateOTP"),
 ]
