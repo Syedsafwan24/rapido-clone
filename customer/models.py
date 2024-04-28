@@ -27,6 +27,7 @@ class DriverDetails(models.Model):
         ('female', 'Female'),
         ('other', 'Other'),
     ]
+    
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     phone = models.CharField(max_length=15)
     email = models.EmailField()
@@ -82,3 +83,9 @@ class ContactQuery(models.Model):
     def __str__(self):
         return self.name
 
+class Requests(models.Model):
+    ride_request = models.ForeignKey(RideRequest, on_delete=models.CASCADE)
+    driver_details = models.ForeignKey(DriverDetails, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Request {self.pk}"
