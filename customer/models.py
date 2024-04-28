@@ -62,11 +62,15 @@ class RideRequest(models.Model):
     dropoff_location = models.CharField(max_length=100)
     pickup_time = models.DateTimeField()
     RIDE_CHOICES = [
-        ('Standard', 'Stamdard'),
+        ('Standard', 'Standard'),
         ('Premium', 'Premium'),
     ]
-    ride_type = models.CharField(max_length=50,choices=RIDE_CHOICES)
+    ride_type = models.CharField(max_length=50, choices=RIDE_CHOICES)
     phone = models.CharField(max_length=15)
+    
+    def __str__(self):
+        return f"RideRequest from {self.user.fullname} - {self.pickup_location} to {self.dropoff_location} ({self.ride_type})"
+
 
 class ContactQuery(models.Model):
     name = models.CharField(max_length=100)
@@ -88,4 +92,4 @@ class Requests(models.Model):
     driver_details = models.ForeignKey(DriverDetails, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Request {self.pk}"
+        return f"Request {self.pk} - Ride Request: {self.ride_request}"

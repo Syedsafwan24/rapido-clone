@@ -39,14 +39,13 @@ def driverLogin(request):
 from django.shortcuts import render, redirect
 from .models import DriverDetails
 
-# from .models import Requests
-
 def validateDriver(request):
     if request.method == 'POST':
         phone_no = request.POST.get('phone_no')
         password = request.POST.get('password')
         
         try:
+            # Retrieve the driver object based on phone number and password
             driver = DriverDetails.objects.get(phone=phone_no, password=password)
         except DriverDetails.DoesNotExist:
             return render(request, 'driverLogin.html', {'error': 'Invalid credentials'})
@@ -57,16 +56,55 @@ def validateDriver(request):
         # Extract the ride requests associated with the driver
         ride_requests = [req.ride_request for req in driver_requests]
         
-        return render(request, 'dashboard.html', {'driver': driver, "ride_requests": ride_requests})
+        # Get the availability status of the driver
+        availability_status = driver.available
+        if availability_status:
+            status = "Available"
+        else:
+            status = "Not Available"
+        # Send driver, ride requests, and availability status as context to dashboard template
+        return render(request, 'dashboard.html', {'driver': driver, "ride_requests": ride_requests, "status": status})
 
     else:
         # Handle case where method is not POST
         return redirect('driverLogin')
 
+def availability(request):
+    if request.method == 'POST':
+        driver = request.POST.get('driver')
+        ride_requests = request.POST.get('ride_requests')        
+        
+        try:
+            # Retrieve the driver object based on the provided driver id
+            
+            
+            # Toggle the availability status of the driver
+            driver.available = not driver.available
+            if driver.available:
+                status = "Available"
+            else:
+                status = "Not Available"
+            # Save the changes to the driver object
+            driver.save()
+            # print()
+            # Redirect the user to an appropriate page
+            print()
+            return render(request, 'dashboard.html', {'driver': driver, "ride_requests": ride_requests, "status": status}) # Assuming 'dashboard' is the name of the dashboard page URL
+        except DriverDetails.DoesNotExist:
+            # Handle the case where the driver with the provided id does not exist
+            return render(request, 'error.html', {'message': 'Driver not found'})
+    else:
+        # Handle the case where the request method is not POST
+        return render(request, 'error.html', {'message': 'Invalid request method'})
 
-from datetime import datetime
+
+
 from django.shortcuts import render, redirect
-from .models import User, DriverDetails, RideRequest
+from .models import DriverDetails
+
+# from .models import Requests
+
+
 
 def submitRideRequest(request):
     if request.method == 'POST':
@@ -97,28 +135,25 @@ def submitRideRequest(request):
         if not available_drivers:
             return render(request, 'success.html', {'user':user,'warning': 'Sorry, currently there are no available rides.'})
         
-        # Select the first available driver
-        selected_driver = available_drivers.first()
-        
-        # Create a new ride request
-        ride_request = RideRequest.objects.create(
-            user=user,
-            pickup_location=pickup_location,
-            dropoff_location=dropoff_location,
-            pickup_time=pickup_time,
-            ride_type=ride_type,
-            phone=user.phone_no
-        )
-        
-        # Store the ride request and driver details IDs in the Requests model
-        Requests.objects.create(ride_request=ride_request, driver_details=selected_driver)
+        # Iterate over each available driver
+        for driver in available_drivers:
+            # Create a new ride request for each driver
+            ride_request = RideRequest.objects.create(
+                user=user,
+                pickup_location=pickup_location,
+                dropoff_location=dropoff_location,
+                pickup_time=pickup_time,
+                ride_type=ride_type,
+                phone=user.phone_no
+            )
+            # Store the ride request and driver details IDs in the Requests model
+            Requests.objects.create(ride_request=ride_request, driver_details=driver)
         
         # Redirect the user to a success page
-        return render(request, 'success.html', {'user':user,'success': 'Your ride request has been sent.'})
+        return render(request, 'success.html', {'user':user,'success': 'Your ride requests have been sent.'})
     else:
         # Handle case where method is not POST
         return render(request, 'ride_request_form.html')
-
 
 
 def dashboard(request):

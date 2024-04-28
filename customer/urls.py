@@ -20,4 +20,6 @@ urlpatterns = [
     path("validateDriver", views.validateDriver, name="validateDriver"),
     path("dashboard", views.dashboard, name="dashboard"),
     path("submit-ride-request", views.submitRideRequest, name="submit-ride-request"),
+    path("submit-ride-request", views.submitRideRequest, name="submit-ride-request"),
+    path("dashboard", views.availability, name="availability"),
 ]

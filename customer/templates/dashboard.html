@@ -21,10 +21,13 @@
     <div class="dashboard-main" style="margin-top:120px; border-radius:8px;">
         <header class="dashboard-header">
             <h1>Welcome, {{ driver.fullname }}</h1>
-            <div class="driver-availability">
-                <label>Available for Rides:</label>
-                <input type="checkbox" id="availabilityToggle" {% if driver.is_available %}checked{% endif %} onchange="toggleAvailability()">
-            </div>
+
+            <form action="{% url 'availability' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="{{ status }}">
+                <input type="hidden" name="driver" value="{{driver}}">
+                <input type="hidden" name="ride_requests" value="{{ride_requests}}">
+            </form>
         </header>
 
         <section class="dashboard-overview">
