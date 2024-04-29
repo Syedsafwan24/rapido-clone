@@ -76,20 +76,20 @@ th {
 }
 
 /* Buttons */
-button {
+/* button {
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
   background-color: #D24545; /* Brand color for buttons */
-  color: white;
+  /* color: white;
   cursor: pointer;
   margin-right: 10px;
   transition: background-color 0.3s ease; /* Smooth transition on hover */
-}
-
+/* }  */
+/* 
 button:hover {
   background-color: #bc3131; /* Darker on hover */
-}
+/* }  */
 
 /* Availability Toggle Animation */
 .availability-toggle {
@@ -111,4 +111,36 @@ table, th, td {
 }
 th {
   background-color: #f2f2f2;
+}
+
+/* Accept Button */
+.accept-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(58, 176, 62); /* Green color for accept button */
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.accept-button:hover {
+  background-color: #27a52c; /* Darker green on hover */
+}
+
+/* Reject Button */
+.reject-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #D24545; /* Red color for reject button */
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.reject-button:hover {
+  background-color: #bc3131; /* Darker red on hover */
 }

@@ -21,5 +21,9 @@ urlpatterns = [
     path("dashboard", views.dashboard, name="dashboard"),
     path("submit-ride-request", views.submitRideRequest, name="submit-ride-request"),
     path("submit-ride-request", views.submitRideRequest, name="submit-ride-request"),
-    path("dashboard", views.availability, name="availability"),
+    path("availability", views.availability, name="availability"),
+    path("rideaccept", views.rideaccept, name="rideaccept"),
+    path("validateAdmin", views.validateAdmin, name="validateAdmin"),
+    path("adminl", views.admin, name="adminl"),
+    path("acceptRide", views.acceptRide, name="acceptRide")
 ]

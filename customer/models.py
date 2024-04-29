@@ -55,7 +55,6 @@ class DriverDetails(models.Model):
     def __str__(self):
         return self.fullname
 
-
 class RideRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pickup_location = models.CharField(max_length=100)

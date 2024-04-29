@@ -1,75 +1,88 @@
 {% extends "nav.html" %}
 {% load static %}
 
-    {% block head %}
-    <title>Request a Ride</title>
-    <link rel="stylesheet" href="{% static 'success.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% block head %}
+<title>Request a Ride</title>
+<link rel="stylesheet" href="{% static 'success.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Be sure to load Bootstrap JavaScript -->
-
-    {% endblock head %}
+<!-- Be sure to load Bootstrap JavaScript -->
+<style>
+    .try-again-btn {
+        background-color: #f44336; /* Red */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    .try-again-btn:hover {
+        background-color: #df2d24; /* Darker red on hover */
+    }
+    
+</style>
+{% endblock head %}
 
 {% block body %}
 
-{% if success %}
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong> {{ success }} </strong> 
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+{% if user %}
+<h1 style="margin-top:120px; text-align:center; color:black;">Welcome, {{user.fullname}} </h1>
 {% endif %}
 
-{% if warning %}
+<div  class="request-ride-container">
 
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>{{ warning }}</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
-{% endif %}
-
-    {% if user %}
-    <h1 style="margin-top:120px; text-align:center; color:black;">Welcome ,{{user.fullname}} </h1>
+    <h1 >Request a Ride</h1>
+    {% if warning %}
+        <br>
+        <div style="color:orange;">
+            <strong><h4>{{ warning }}</h4></strong>
+            <button onclick="window.location.reload();" class="try-again-btn">Try Again</button>
+        </div>
+        <br>
     {% endif %}
-
-    <div  class="request-ride-container">
-
-        <h1>Request a Ride</h1>
-        <p>Fill out the form below to book your ride.</p>
+    {% if success %}
+    <br>
+        <div style="color:lightgreen;">
+            <strong><h4>{{ success }}</h4></strong>
+        </div>
+        <br>
+    {% endif %}
+    <p>Fill out the form below to book your ride.</p>
+    
+    <form action="{% url 'submit-ride-request' %}" method="post">
+        {% csrf_token %}
+        <!-- Hidden input field to pass the user object -->
+        <input type="hidden" name="user_id" value="{{ user }}">
         
-        <form action="{% url 'submit-ride-request' %}" method="post">
-            {% csrf_token %}
-            <!-- Hidden input field to pass the user object -->
-            <input type="hidden" name="user_id" value="{{ user }}">
-            
-            <div class="form-group">
-                <label for="pickup-location">Pick-up Location:</label>
-                <input type="text" id="pickup-location" name="pickup_location" required>
-            </div>
-            <div class="form-group">
-                <label for="dropoff-location">Drop-off Location:</label>
-                <input type="text" id="dropoff-location" name="dropoff_location" required>
-            </div>
-            <div class="form-group">
-                <label for="pickup-time">Pick-up Time:</label>
-                <input type="time" id="pickup-time" name="pickup_time" required>
-            </div>
-            <div class="form-group">
-                <label for="ride-type">Type of Ride:</label>
-                <select id="ride-type" name="ride_type">
-                    <option value="standard">Standard</option>
-                    <option value="premium">Premium</option>
-                </select>
-            </div>
-            <button type="submit" class="req">Request Ride</button>
-        </form>
-    </div>
+        <div class="form-group">
+            <label for="pickup-location">Pick-up Location:</label>
+            <input type="text" id="pickup-location" name="pickup_location" required>
+        </div>
+        <div class="form-group">
+            <label for="dropoff-location">Drop-off Location:</label>
+            <input type="text" id="dropoff-location" name="dropoff_location" required>
+        </div>
+        <div class="form-group">
+            <label for="pickup-time">Pick-up Time:</label>
+            <input type="time" id="pickup-time" name="pickup_time" required>
+        </div>
+        <div class="form-group">
+            <label for="ride-type">Type of Ride:</label>
+            <select id="ride-type" name="ride_type">
+                <option value="standard">Standard</option>
+                <option value="premium">Premium</option>
+            </select>
+        </div>
+        <button type="submit" class="req">Request Ride</button>
+    </form>
+</div>
 {% endblock body %}
-

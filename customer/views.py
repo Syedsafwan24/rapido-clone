@@ -12,6 +12,9 @@ from django.http import HttpResponse
 def index(request):
     return render(request, "index.html")
 
+def rideaccept(request):
+    return render(request, "rideaccept.html")
+
 def aboutus(request):
     return render(request,"about_Us.html")
 
@@ -33,8 +36,39 @@ def success(request):
 def adminlogin(request):
     return render(request, "adminlogin.html")
 
+def admin(request):
+    return render(request, "admin.html")
+
 def driverLogin(request):
     return render(request, "driverLogin.html")
+
+def acceptRide(request):
+    pass
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+
+def validateAdmin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # Authenticate the user
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            # If authentication is successful, log the user in
+            login(request, user)
+            # Redirect the user to a success page or home page
+            return redirect('adminlogin')  # Replace 'success' with the appropriate URL name
+        else:
+            # If authentication fails, render the login page with an error message
+            error = "Invalid credentials. Please try again."
+            return render(request, 'admin.html', {'error': error})
+    else:
+        # If the request method is not POST, render the login page
+        return render(request, 'admin.html')
+
 
 from django.shortcuts import render, redirect
 from .models import DriverDetails
@@ -61,34 +95,38 @@ def validateDriver(request):
         if availability_status:
             status = "Available"
         else:
-            status = "Not Available"
-        # Send driver, ride requests, and availability status as context to dashboard template
-        return render(request, 'dashboard.html', {'driver': driver, "ride_requests": ride_requests, "status": status})
+            status = "Not-Available"
+        
+        # Pass the entire DriverDetails object, ride requests, and availability status as context to dashboard.html
+        return render(request, 'dashboard.html', {'driver': driver, 'ride_requests': ride_requests, 'status': status})
 
     else:
         # Handle case where method is not POST
         return redirect('driverLogin')
 
 def availability(request):
+    print("here")
     if request.method == 'POST':
-        driver = request.POST.get('driver')
-        ride_requests = request.POST.get('ride_requests')        
+        phone = request.POST.get('driver')
+        driver = DriverDetails.objects.get(phone = phone)
+        driver_requests = Requests.objects.filter(driver_details=driver)
         
+        # Extract the ride requests associated with the driver
+        ride_requests = [req.ride_request for req in driver_requests] 
         try:
             # Retrieve the driver object based on the provided driver id
-            
-            
             # Toggle the availability status of the driver
             driver.available = not driver.available
+            
             if driver.available:
                 status = "Available"
             else:
-                status = "Not Available"
+                status = "Not-Available"
             # Save the changes to the driver object
             driver.save()
             # print()
             # Redirect the user to an appropriate page
-            print()
+            print( f"driver: {driver}, ride_requests : {ride_requests}, status: {status}")
             return render(request, 'dashboard.html', {'driver': driver, "ride_requests": ride_requests, "status": status}) # Assuming 'dashboard' is the name of the dashboard page URL
         except DriverDetails.DoesNotExist:
             # Handle the case where the driver with the provided id does not exist
@@ -96,13 +134,6 @@ def availability(request):
     else:
         # Handle the case where the request method is not POST
         return render(request, 'error.html', {'message': 'Invalid request method'})
-
-
-
-from django.shortcuts import render, redirect
-from .models import DriverDetails
-
-# from .models import Requests
 
 
 
@@ -133,7 +164,7 @@ def submitRideRequest(request):
         
         # Check if there are available drivers
         if not available_drivers:
-            return render(request, 'success.html', {'user':user,'warning': 'Sorry, currently there are no available rides.'})
+            return render(request, 'success.html', {'user':user,'warning': 'Sorry, Currently there are no available rides.\nTry again in some times'})
         
         # Iterate over each available driver
         for driver in available_drivers:
@@ -150,7 +181,7 @@ def submitRideRequest(request):
             Requests.objects.create(ride_request=ride_request, driver_details=driver)
         
         # Redirect the user to a success page
-        return render(request, 'success.html', {'user':user,'success': 'Your ride requests have been sent.'})
+        return render(request, 'success.html', {'user':user,'success': 'Your Ride request have been sent.'})
     else:
         # Handle case where method is not POST
         return render(request, 'ride_request_form.html')

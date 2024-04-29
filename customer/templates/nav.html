@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    {% comment %} <div class="navbar_sticky" id="navbar">
+    <div class="navbar_sticky" id="navbar">
         <div class="navbar">
             <img src="{% static 'Photos/RIDEEASE.png' %}" alt="RideEase Logo">
             <ul>
@@ -26,10 +26,10 @@
                 <li> <a href="{% url 'aboutus' %}"> About Us</a> </li>
                 <li> <a href="{% url 'safety' %}"> Safety </a> </li>
                 <li> <a href="{% url 'contactus' %}"> Contact Us </a> </li>
-                <li> <a href="{% url 'adminlogin' %}">Admin </a></li>
+                <li> <a href="{% url 'adminl' %}">Admin </a></li>
             </ul>
         </div>
-    </div> {% endcomment %}
+    </div>
 
     {% block body %}
     {% endblock body %}

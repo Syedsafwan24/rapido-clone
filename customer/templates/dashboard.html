@@ -5,28 +5,32 @@
 <!-- Optional: Add custom CSS here -->
 <link rel="stylesheet" href="{% static 'dashboard.css' %}">
 <style>
-    /* You can add additional internal styles here */
+    .accept-button:hover {
+        background-color: #27a52c; /* Darker green on hover */
+    }
+    .reject-button:hover {
+        background-color: #bc3131; /* Darker red on hover */
+    }
 </style>
 {% endblock head %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Driver Dashboard - Ridease</title>
-</head>
-<body>
+
 {% block body %}
     <div class="dashboard-main" style="margin-top:120px; border-radius:8px;">
         <header class="dashboard-header">
             <h1>Welcome, {{ driver.fullname }}</h1>
 
-            <form action="{% url 'availability' %}" method="post">
+            <form action="{% url 'availability' %}" method="post" class="availability">
                 {% csrf_token %}
-                <input type="submit" value="{{ status }}">
-                <input type="hidden" name="driver" value="{{driver}}">
-                <input type="hidden" name="ride_requests" value="{{ride_requests}}">
+                {% if status == "Available" %}
+                    <button style="background-color: #4CAF50;" type="submit" class="accept-button" >{{ status }}</button>
+                {% endif %}
+                
+                {% if status == "Not-Available" %}
+                    <button style="background-color: #D24545;" type="submit" class="reject-button" >{{ status }}</button>
+                {% endif %}
+                <input type="hidden" name="driver" value="{{ driver.phone }}"> 
+                <input type="hidden" name="ride_requests" value="{{ ride_requests }}">
             </form>
         </header>
 
@@ -65,9 +69,11 @@
                         <td>{{ request.pickup_location }}</td>
                         <td>{{ request.dropoff_location }}</td>
                         <td>₹ 230 </td>
-                        <td>
-                            <button onclick="acceptRide({{ request.id }})">Accept</button>
-                            <button onclick="declineRide({{ request.id }})">Decline</button>
+                        <td style="display: flex;">
+                            <form action="{% url 'acceptRide' %}" method="post">
+                                <input type="submit" value="Accept" style="background-color: #4CAF50;"  class="accept-button">
+                                <input type="hidden" value="{{ request.id }}" name="acceptRideId">
+                            </form>
                         </td>
                     </tr>
                     {% empty %}
@@ -100,5 +106,3 @@
         }
     </script>
 {% endblock body %}
-</body>
-</html>
