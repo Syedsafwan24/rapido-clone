@@ -24,7 +24,7 @@ def contactus(request):
 def safety(request):
     return render(request,"safety.html")
 
-def login(request):
+def loginu(request):
     return render(request,"login.html")
 
 def signup(request):

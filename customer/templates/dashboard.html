@@ -71,6 +71,7 @@
                         <td>₹ 230 </td>
                         <td style="display: flex;">
                             <form action="{% url 'acceptRide' %}" method="post">
+                                {% csrf_token %}
                                 <input type="submit" value="Accept" style="background-color: #4CAF50;"  class="accept-button">
                                 <input type="hidden" value="{{ request.id }}" name="acceptRideId">
                             </form>
