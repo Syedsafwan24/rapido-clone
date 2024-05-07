@@ -27,11 +27,12 @@ class DriverDetails(models.Model):
         ('female', 'Female'),
         ('other', 'Other'),
     ]
+    
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     phone = models.CharField(max_length=15)
     email = models.EmailField()
-    address = models.TextField()
-
+    address = models.CharField(max_length=150)
+    password = models.CharField(max_length=150)
     # Identification
     license = models.CharField(max_length=20)
     vehicle_reg = models.CharField(max_length=20)
@@ -45,12 +46,29 @@ class DriverDetails(models.Model):
     vehicle_make = models.CharField(max_length=50)
     vehicle_model = models.CharField(max_length=50)
     vehicle_color = models.CharField(max_length=20)
-
+    available = models.BooleanField(default=False)
+    ride_request_data = models.TextField(blank=True, null=True)
     # Agreement
     agreement = models.BooleanField()
+    ride_request = models.OneToOneField('RideRequest', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.fullname
+
+class RideRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pickup_location = models.CharField(max_length=100)
+    dropoff_location = models.CharField(max_length=100)
+    pickup_time = models.DateTimeField()
+    RIDE_CHOICES = [
+        ('Standard', 'Standard'),
+        ('Premium', 'Premium'),
+    ]
+    ride_type = models.CharField(max_length=50, choices=RIDE_CHOICES)
+    phone = models.CharField(max_length=15)
+    
+    def __str__(self):
+        return f"RideRequest from {self.user.fullname} - {self.pickup_location} to {self.dropoff_location} ({self.ride_type})"
 
 
 class ContactQuery(models.Model):
@@ -68,3 +86,9 @@ class ContactQuery(models.Model):
     def __str__(self):
         return self.name
 
+class Requests(models.Model):
+    ride_request = models.ForeignKey(RideRequest, on_delete=models.CASCADE)
+    driver_details = models.ForeignKey(DriverDetails, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Request {self.pk} - Ride Request: {self.ride_request}"

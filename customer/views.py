@@ -1,14 +1,19 @@
-from genericpath import exists
-from django import views
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import User,ContactQuery
+import random
+from .models import DriverDetails,RideRequest,Requests
+from datetime import datetime
+from django.http import HttpResponse
 
 # Create your views here.
 
 def index(request):
     return render(request, "index.html")
+
+def rideaccept(request):
+    return render(request, "rideaccept.html")
 
 def aboutus(request):
     return render(request,"about_Us.html")
@@ -19,7 +24,7 @@ def contactus(request):
 def safety(request):
     return render(request,"safety.html")
 
-def login(request):
+def loginu(request):
     return render(request,"login.html")
 
 def signup(request):
@@ -30,6 +35,164 @@ def success(request):
 
 def adminlogin(request):
     return render(request, "adminlogin.html")
+
+def admin(request):
+    return render(request, "admin.html")
+
+def driverLogin(request):
+    return render(request, "driverLogin.html")
+
+def acceptRide(request):
+    pass
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+
+def validateAdmin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # Authenticate the user
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            # If authentication is successful, log the user in
+            login(request, user)
+            # Redirect the user to a success page or home page
+            return redirect('adminlogin')  # Replace 'success' with the appropriate URL name
+        else:
+            # If authentication fails, render the login page with an error message
+            error = "Invalid credentials. Please try again."
+            return render(request, 'admin.html', {'error': error})
+    else:
+        # If the request method is not POST, render the login page
+        return render(request, 'admin.html')
+
+
+from django.shortcuts import render, redirect
+from .models import DriverDetails
+
+def validateDriver(request):
+    if request.method == 'POST':
+        phone_no = request.POST.get('phone_no')
+        password = request.POST.get('password')
+        
+        try:
+            # Retrieve the driver object based on phone number and password
+            driver = DriverDetails.objects.get(phone=phone_no, password=password)
+        except DriverDetails.DoesNotExist:
+            return render(request, 'driverLogin.html', {'error': 'Invalid credentials'})
+        
+        # Retrieve all Requests associated with the driver
+        driver_requests = Requests.objects.filter(driver_details=driver)
+        
+        # Extract the ride requests associated with the driver
+        ride_requests = [req.ride_request for req in driver_requests]
+        
+        # Get the availability status of the driver
+        availability_status = driver.available
+        if availability_status:
+            status = "Available"
+        else:
+            status = "Not-Available"
+        
+        # Pass the entire DriverDetails object, ride requests, and availability status as context to dashboard.html
+        return render(request, 'dashboard.html', {'driver': driver, 'ride_requests': ride_requests, 'status': status})
+
+    else:
+        # Handle case where method is not POST
+        return redirect('driverLogin')
+
+def availability(request):
+    print("here")
+    if request.method == 'POST':
+        phone = request.POST.get('driver')
+        driver = DriverDetails.objects.get(phone = phone)
+        driver_requests = Requests.objects.filter(driver_details=driver)
+        
+        # Extract the ride requests associated with the driver
+        ride_requests = [req.ride_request for req in driver_requests] 
+        try:
+            # Retrieve the driver object based on the provided driver id
+            # Toggle the availability status of the driver
+            driver.available = not driver.available
+            
+            if driver.available:
+                status = "Available"
+            else:
+                status = "Not-Available"
+            # Save the changes to the driver object
+            driver.save()
+            # print()
+            # Redirect the user to an appropriate page
+            print( f"driver: {driver}, ride_requests : {ride_requests}, status: {status}")
+            return render(request, 'dashboard.html', {'driver': driver, "ride_requests": ride_requests, "status": status}) # Assuming 'dashboard' is the name of the dashboard page URL
+        except DriverDetails.DoesNotExist:
+            # Handle the case where the driver with the provided id does not exist
+            return render(request, 'error.html', {'message': 'Driver not found'})
+    else:
+        # Handle the case where the request method is not POST
+        return render(request, 'error.html', {'message': 'Invalid request method'})
+
+
+
+def submitRideRequest(request):
+    if request.method == 'POST':
+        # Retrieve form data from POST request
+        user_id = request.POST.get('user_id')
+        pickup_location = request.POST.get('pickup_location')
+        dropoff_location = request.POST.get('dropoff_location')
+        ride_type = request.POST.get('ride_type')
+        
+        # Get current date and time
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+        try:
+            user = User.objects.get(fullname=user_id)
+        except User.DoesNotExist:
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
+        
+        try:
+            # Convert current time string to datetime object
+            pickup_time = datetime.strptime(current_time, "%Y-%m-%d %H:%M")
+        except ValueError:
+            # Handle invalid time format
+            return render(request, 'success.html', {'user':user,'message': 'Invalid time format'})
+        
+        # Get all available drivers
+        available_drivers = DriverDetails.objects.filter(available=True)
+        
+        # Check if there are available drivers
+        if not available_drivers:
+            return render(request, 'success.html', {'user':user,'warning': 'Sorry, Currently there are no available rides.\nTry again in some times'})
+        
+        # Iterate over each available driver
+        for driver in available_drivers:
+            # Create a new ride request for each driver
+            ride_request = RideRequest.objects.create(
+                user=user,
+                pickup_location=pickup_location,
+                dropoff_location=dropoff_location,
+                pickup_time=pickup_time,
+                ride_type=ride_type,
+                phone=user.phone_no
+            )
+            # Store the ride request and driver details IDs in the Requests model
+            Requests.objects.create(ride_request=ride_request, driver_details=driver)
+        
+        # Redirect the user to a success page
+        return render(request, 'success.html', {'user':user,'success': 'Your Ride request have been sent.'})
+    else:
+        # Handle case where method is not POST
+        return render(request, 'ride_request_form.html')
+
+
+def dashboard(request):
+    # Query the RideRequest model to get all incoming ride requests
+    ride_requests = RideRequest.objects.all()
+    # print(ride_requests)
+    # Pass the ride_requests data to the template
+    return render(request, 'dashboard.html', {'ride_requests': ride_requests})
 
 def addUser(request):
     if request.method == 'POST':
@@ -75,41 +238,25 @@ def addUser(request):
         return render(request, 'signup.html')
     
 
-# def validateUser(request):
-#     if request.method == 'post':
-#         phone_no = request.POST.get('phone_no')
-#         password = request.POST.get('password')
-        
+
 def validateUser(request):
-    
     if request.method == 'POST':
-        print("here dd")
         phone_no = request.POST.get('phone_no')
         password = request.POST.get('password')
-        print(password)
-        print(phone_no)
-        # Query the User model based on the provided phone number
+        
         try:
             user = User.objects.get(phone_no=phone_no)
         except User.DoesNotExist:
-            # Handle case where user with given phone number does not exist
             return render(request, 'login.html', {'error': 'Invalid credentials'})
-        print(user)
-        print(user.password)
-        # Check if the provided password matches the user's password in the database
+        
         if password != user.password:
-            # Handle case where passwords do not match
             return render(request, 'login.html', {'error': 'Invalid credentials'})
-        print("here also")
-        # Redirect to a success page or another URL
-        return HttpResponseRedirect(reverse('success_page'))
+        
+        # Pass user data to the success.html template
+        return render(request, 'success.html', {'user': user})
     else:
-        print("here")
-        # Handle case where method is not POST
         return render(request, 'login.html')
-    
-from django.shortcuts import render, redirect
-from .models import DriverDetails
+
 
 def addDriver(request):
     if request.method == 'POST':
@@ -128,8 +275,15 @@ def addDriver(request):
         vehicle_make = request.POST.get('vehicle_make')
         vehicle_model = request.POST.get('vehicle_model')
         vehicle_color = request.POST.get('vehicle_color')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('Comfirm_password')
+        
+        if confirm_password != password : 
+            return render(request, 'adminlogin.html',{
+                "error": "Password Didn't match!"
+            })
         agreement = request.POST.get('agreement') == 'on'
-
+        print(address)
         # Create a new DriverDetails object
         driver = DriverDetails.objects.create(
             fullname=fullname,
