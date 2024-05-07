@@ -33,6 +33,7 @@
 {% endblock head %}
 
 {% block body %}
+<<<<<<< HEAD
 
 {% if user %}
 <h1 style="margin-top:120px; text-align:center; color:black;">Welcome, {{user.fullname}} </h1>
@@ -85,4 +86,33 @@
         <button type="submit" class="req">Request Ride</button>
     </form>
 </div>
+=======
+    <div style="margin-top:120px;" class="request-ride-container">
+        <h1>Request a Ride</h1>
+        <p> Fill out the form below to book your ride.</p>
+        <form action="/submit-ride-request" method="post">
+            <div class="form-group">
+                <label for="pickup-location">Pick-up Location:</label>
+                <input type="text" id="pickup-location" name="pickup_location" required>
+            </div>
+            <div class="form-group">
+                <label for="dropoff-location">Drop-off Location:</label>
+                <input type="text" id="dropoff-location" name="dropoff_location" required>
+            </div>
+            <div class="form-group">
+                <label for="pickup-time">Pick-up Time:</label>
+                <input type="time" id="pickup-time" name="pickup_time" required>
+            </div>
+            <div class="form-group">
+                <label for="ride-type">Type of Ride:</label>
+                <select id="ride-type" name="ride_type">
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                   
+                </select>
+            </div>
+            <button type="submit" class="req">Request Ride</button>
+        </form>
+    </div>
+>>>>>>> ridease/main
 {% endblock body %}
