@@ -4,3 +4,5 @@ from .models import *
 admin.site.register(User)
 admin.site.register(DriverDetails)
 admin.site.register(ContactQuery)
+admin.site.register(RideRequest)
+admin.site.register(Requests)

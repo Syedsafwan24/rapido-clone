@@ -13,6 +13,9 @@
 
 <div class="container_div">
     <div class="Contact_Us_Form_div">
+        {% if error %}
+            <h4 sytle="color:red; margin-left:75px;">{{error}}</h4>
+        {% endif %}
         <h1>Driver Signup</h1>
         <br>
         <form action="{% url 'addDriver' %}" method="post">
@@ -27,7 +30,7 @@
             </select>
             <input type="text" name="phone" placeholder="Phone Number">
             <input type="text" name="email" placeholder="Email">
-            <input type="text" name="text" placeholder="Address"></input>
+            <input type="text" name="address" placeholder="Address"></input>
             <input type="text" name="license" placeholder="License Number">
             <input type="text" name="vehicle_reg" placeholder="Vehicle Registration Number">
             <input type="text" name="bank_name" placeholder="Bank Name">
@@ -36,6 +39,8 @@
             <input type="text" name="vehicle_make" placeholder="Vehicle Make">
             <input type="text" name="vehicle_model" placeholder="Vehicle Model">
             <input type="text" name="vehicle_color" placeholder="Vehicle Color">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="Comfirm_password" placeholder="Confirm Password">
             <br><br><label><input type="checkbox" name="agreement" required> I agree to the terms and conditions</label><br>
             <input type="submit" value="Sign Up">
         </form>
